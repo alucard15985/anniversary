@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nuestro Rincón Especial 🐈📜❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Fuentes Opción 1: Dancing Script + Indie Flower -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Indie+Flower&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-color: #1a1423; /* Fondo noche estrellada / íntimo */
+      --bg-color: #1a1423; /* Fondo noche estrellada e íntimo */
       --paper-bg: #fbf7ee; /* Pergamino cálido */
-      --ink-color: #2b1b17; /* Tinta café borgoña profundo */
+      --ink-color: #2b1b17; /* Tinta borgoña/café profundo */
       --accent-color: #b33939; /* Rojo romántico sutil */
     }
 
@@ -107,30 +108,33 @@
     .chapter { display: none; }
     .chapter.active { display: block; }
 
-    /* Tipografía Romántica */
+    /* Títulos: Dancing Script */
     h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.5rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.2rem;
+      font-weight: 700;
       color: var(--accent-color);
       margin-bottom: 15px;
       text-align: center;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
     }
 
+    /* Texto Narrativo: Indie Flower */
     .typewriter-text {
-      font-family: 'Caveat', cursive;
-      font-size: 1.8rem;
-      line-height: 1.7;
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.65rem;
+      line-height: 1.6;
       min-height: 140px;
       text-align: left;
       white-space: pre-wrap;
       color: var(--ink-color);
+      letter-spacing: 0.5px;
     }
 
     .cursor {
       display: inline-block;
       width: 2px;
-      height: 1.5rem;
+      height: 1.4rem;
       background-color: var(--accent-color);
       margin-left: 3px;
       animation: blink 0.8s infinite;
@@ -152,8 +156,9 @@
       padding: 15px;
       border-radius: 10px;
       border: 1px dashed var(--accent-color);
-      font-family: 'Caveat', cursive;
-      font-size: 1.4rem;
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.35rem;
+      font-weight: bold;
       cursor: pointer;
       text-align: center;
       transition: all 0.3s;
@@ -165,8 +170,9 @@
     .secret-box { margin-top: 20px; text-align: center; }
 
     .secret-input {
-      font-family: 'Caveat', cursive;
-      font-size: 1.6rem;
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.5rem;
+      font-weight: bold;
       padding: 8px;
       background: transparent;
       border: none;
@@ -260,7 +266,7 @@
         <br>
         <button class="btn-next" onclick="checkSecret()">Romper el sello 🔑</button>
       </div>
-      <p id="errorMsg" style="color: #b33939; font-family: 'Caveat'; font-size: 1.5rem; display: none; text-align:center; margin-top:10px;">¡Ese no es el sello secreto! Intenta de nuevo 🐱</p>
+      <p id="errorMsg" style="color: #b33939; font-family: 'Indie Flower'; font-size: 1.4rem; display: none; text-align:center; margin-top:10px; font-weight:bold;">¡Ese no es el sello secreto! Intenta de nuevo 🐱</p>
     </div>
 
     <!-- Capítulo 5 -->
@@ -294,7 +300,7 @@
   </audio>
 
   <script>
-    // Historias con un tono más pausado y romántico
+    // Historias
     const stories = {
       1: "Había una vez, un rincón creado únicamente para nosotros...\n\nUn pequeño libro digital para detener el tiempo y recordar lo bonito que es caminar juntos. Bienvenido a nuestras páginas.",
       2: "Dicen que el tiempo vuela cuando uno es feliz...\n\nPero contigo no solo pasan los minutos, se guardan miradas, risas compartidas y momentos que se quedan grabados para siempre.",
@@ -305,22 +311,14 @@
       7: "Y así llegamos a la última hoja de este capítulo...\n\n¿Aceptas tener una cita especial y mágica conmigo este fin de semana?"
     };
 
-    // Colección de Gatitos de Distintos Colores y Tipos
-    const catIcons = [
-      '🐈‍⬛', // Gato Negro
-      '🐈',   // Gato Naranja / Calicó
-      '🐱',   // Carita de Gato
-      '🐾',   // Patita
-      '🖤',   // Corazón Oscuro
-      '🤍',   // Corazón Blanco
-      '🤎'    // Corazón Café
-    ];
+    // Colección de Gatitos de Distintos Colores
+    const catIcons = ['🐈‍⬛', '🐈', '🐱', '🐾', '🖤', '🤍', '🤎'];
 
     let unlocked = false;
     let typingTimeout;
 
-    // Velocidad más lenta: 65 milisegundos por letra (antes era 30ms)
-    function typeWriter(text, elementId, speed = 65, callback = null) {
+    // Escritura pausada: 60ms por carácter
+    function typeWriter(text, elementId, speed = 60, callback = null) {
       const container = document.getElementById(elementId);
       container.innerHTML = '';
       let i = 0;
@@ -359,8 +357,7 @@
       if(num === 4) document.getElementById('secretBox').style.display = 'none';
       if(num === 7) document.getElementById('questionGroup').style.display = 'none';
 
-      // Transición de texto lento y romántico
-      typeWriter(stories[num], 'text' + num, 65, () => {
+      typeWriter(stories[num], 'text' + num, 60, () => {
         if(num === 3) document.getElementById('cardsGrid').style.display = 'grid';
         if(num === 4) document.getElementById('secretBox').style.display = 'block';
         if(num === 7) document.getElementById('questionGroup').style.display = 'flex';
@@ -384,16 +381,14 @@
       }
     }
 
-    // Generador de Gatos Esporádicos por la Pantalla
+    // Generador de Gatos Esporádicos
     function spawnRandomCat() {
       const cat = document.createElement('div');
       cat.className = 'random-cat cat-appear';
       
-      // Elegir un icono/gato aleatorio de la lista
       const randomIcon = catIcons[Math.floor(Math.random() * catIcons.length)];
       cat.innerHTML = randomIcon + '💕';
 
-      // Posición aleatoria en la pantalla
       const posX = Math.random() * (window.innerWidth - 60);
       const posY = Math.random() * (window.innerHeight - 60);
 
@@ -402,18 +397,14 @@
 
       document.body.appendChild(cat);
 
-      // Eliminar el elemento después de que termina la animación (4s)
-      setTimeout(() => {
-        cat.remove();
-      }, 4000);
+      setTimeout(() => cat.remove(), 4000);
     }
 
-    // Aparece un gato de forma aleatoria cada 3.5 a 6 segundos
     setInterval(() => {
       spawnRandomCat();
     }, Math.random() * 2500 + 3500);
 
-    // Botón "No" Juguetón
+    // Botón "No"
     const meow = document.getElementById('meowSound');
     function moveNoButton() {
       meow.play().catch(() => {});
