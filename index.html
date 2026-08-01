@@ -105,23 +105,23 @@
       100% { opacity: 0; transform: scale(0.8) translateY(-20px); }
     }
 
-    /* NAVEGACIÓN */
+    /* NAVEGACIÓN DE BOTONES */
     .nav-tabs {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 25px;
       flex-wrap: wrap;
       justify-content: center;
-      max-width: 700px;
+      max-width: 750px;
       z-index: 10;
     }
 
     .tab-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 215, 0, 0.2);
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #e0d0b0;
       cursor: pointer;
       transition: all 0.3s;
@@ -135,11 +135,11 @@
     }
 
     .tab-btn.locked {
-      opacity: 0.3;
+      opacity: 0.35;
       cursor: not-allowed;
     }
 
-    /* PERGAMINO */
+    /* PERGAMINO PRINCIPAL */
     .manuscript-container {
       position: relative;
       z-index: 5;
@@ -148,7 +148,7 @@
       background: var(--paper-bg);
       color: var(--ink-color);
       border-radius: 16px;
-      padding: 45px 35px;
+      padding: 40px 30px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 90px rgba(139, 69, 19, 0.12), 0 0 20px rgba(255, 215, 0, 0.1);
       min-height: 520px;
       display: flex;
@@ -162,7 +162,7 @@
 
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 3.2rem;
+      font-size: 2.8rem;
       font-weight: 700;
       color: var(--accent-color);
       margin-bottom: 15px;
@@ -172,7 +172,7 @@
 
     .typewriter-text {
       font-family: 'Indie Flower', cursive;
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       line-height: 1.6;
       min-height: 120px;
       text-align: left;
@@ -196,8 +196,8 @@
     /* GRID DE FOTOS EN CAPÍTULO 3 */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 12px;
       margin-top: 20px;
     }
 
@@ -217,7 +217,7 @@
 
     .card-item img {
       width: 100%;
-      height: 90px;
+      height: 85px;
       object-fit: cover;
       border-radius: 6px;
       margin-bottom: 6px;
@@ -226,7 +226,7 @@
 
     .card-item span {
       font-family: 'Indie Flower', cursive;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: bold;
       color: var(--ink-color);
     }
@@ -236,64 +236,116 @@
       box-shadow: 0 8px 15px rgba(179, 57, 57, 0.2);
     }
 
-    /* MODAL DE FOTOS */
+    /* MODAL DE FOTOS MEJORADO CON NAVEGACIÓN Y SORPRESA */
     .photo-modal {
       display: none;
       position: fixed;
       z-index: 100;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(5px);
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 15px;
     }
 
     .modal-content {
       background: var(--paper-bg);
       border-radius: 16px;
-      padding: 25px;
-      max-width: 500px;
+      padding: 25px 20px 20px 20px;
+      max-width: 520px;
       width: 100%;
       text-align: center;
       position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
       border: 2px solid var(--accent-color);
       animation: modalFadeIn 0.3s ease-out;
     }
 
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.8); }
+      from { opacity: 0; transform: scale(0.85); }
       to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-img-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .modal-content img {
       max-width: 100%;
-      max-height: 320px;
+      max-height: 300px;
       border-radius: 10px;
       object-fit: contain;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       border: 1px solid #ddd;
       background-color: #f0e6d2;
     }
 
+    .nav-arrow {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background: rgba(179, 57, 57, 0.8);
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+
+    .nav-arrow:hover { background: var(--accent-color); transform: translateY(-50%) scale(1.1); }
+    .nav-prev { left: -10px; }
+    .nav-next { right: -10px; }
+
+    .modal-counter {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
     .modal-caption {
       font-family: 'Indie Flower', cursive;
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       color: var(--ink-color);
       line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .modal-surprise {
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      background: rgba(179, 57, 57, 0.08);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px dashed var(--accent-color);
+      font-weight: bold;
     }
 
     .close-modal {
       position: absolute;
-      top: 10px; right: 15px;
+      top: 8px; right: 15px;
       font-size: 1.8rem;
       color: var(--accent-color);
       cursor: pointer;
       font-weight: bold;
     }
 
+    /* SECCIÓN SECRETA */
     .secret-box { margin-top: 20px; text-align: center; }
 
     .secret-input {
@@ -354,14 +406,14 @@
     <source src="./musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Navegación -->
+  <!-- Navegación con nombres Gatunos / Cómplices -->
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="goToChapter(1)">Inicio 📜</button>
-    <button class="tab-btn" onclick="goToChapter(2)">Cap II</button>
-    <button class="tab-btn" onclick="goToChapter(3)">Cap III</button>
-    <button class="tab-btn" onclick="goToChapter(4)">Cap IV 🔒</button>
-    <button class="tab-btn locked" id="tab5" onclick="goToChapter(5)">Cap V 🔒</button>
-    <button class="tab-btn locked" id="tab6" onclick="goToChapter(6)">Cap VI 🔒</button>
+    <button class="tab-btn active" onclick="goToChapter(1)">Cap I: El Primer Maullido 📜</button>
+    <button class="tab-btn" onclick="goToChapter(2)">Cap II: Travesuras ⏳</button>
+    <button class="tab-btn" onclick="goToChapter(3)">Cap III: Álbum 📸</button>
+    <button class="tab-btn" onclick="goToChapter(4)">Cap IV: Código Michi 🔐</button>
+    <button class="tab-btn locked" id="tab5" onclick="goToChapter(5)">Cap V: Mi Favorita 💖</button>
+    <button class="tab-btn locked" id="tab6" onclick="goToChapter(6)">Cap VI: Corazón 💌</button>
     <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Cierre 🎁</button>
   </div>
 
@@ -370,21 +422,21 @@
     
     <!-- Capítulo 1 -->
     <div class="chapter active" id="cap1">
-      <h1>Capítulo I: El Prólogo 🌹</h1>
+      <h1>Cap I: El Primer Maullido 📜</h1>
       <div class="typewriter-text" id="text1"></div>
       <button class="btn-next" onclick="goToChapter(2)">Siguiente página ➔</button>
     </div>
 
     <!-- Capítulo 2 -->
     <div class="chapter" id="cap2">
-      <h1>Capítulo II: 7 Años en Números ⏳</h1>
+      <h1>Cap II: 2,555 Días de Travesuras ⏳</h1>
       <div class="typewriter-text" id="text2"></div>
       <button class="btn-next" onclick="goToChapter(3)">Continuar el viaje ➔</button>
     </div>
 
     <!-- Capítulo 3 -->
     <div class="chapter" id="cap3">
-      <h1>Capítulo III: 7 Destellos 📸</h1>
+      <h1>Cap III: Álbum de Huellitas 📸</h1>
       <div class="typewriter-text" id="text3"></div>
       <div class="cards-grid" id="cardsGrid" style="display:none;">
         <div class="card-item" onclick="openPhotoModal(0)">
@@ -421,7 +473,7 @@
 
     <!-- Capítulo 4 -->
     <div class="chapter" id="cap4">
-      <h1>Capítulo IV: El Sello Secreto 🔐</h1>
+      <h1>Cap IV: El Código Michi 🔐</h1>
       <div class="typewriter-text" id="text4"></div>
       <div class="secret-box" id="secretBox" style="display:none;">
         <input type="text" id="secretKey" class="secret-input" placeholder="Escribe la clave..." autocomplete="off">
@@ -433,21 +485,21 @@
 
     <!-- Capítulo 5 -->
     <div class="chapter" id="cap5">
-      <h1>Capítulo V: 7 Razones 💖</h1>
+      <h1>Cap V: Por Qué Eres Mi Favorita 💖</h1>
       <div class="typewriter-text" id="text5"></div>
       <button class="btn-next" onclick="goToChapter(6)">Siguiente página ➔</button>
     </div>
 
     <!-- Capítulo 6 -->
     <div class="chapter" id="cap6">
-      <h1>Capítulo VI: Carta de Aniversario 💌</h1>
+      <h1>Cap VI: Palabras del Corazón 💌</h1>
       <div class="typewriter-text" id="text6"></div>
       <button class="btn-next" onclick="goToChapter(7)">Llegar al final 🎁</button>
     </div>
 
     <!-- Capítulo 7 -->
     <div class="chapter" id="cap7">
-      <h1>Capítulo VII: La Continuación 🌹</h1>
+      <h1>Cierre: ¿Continuamos la Aventura? 🎁</h1>
       <div class="typewriter-text" id="text7"></div>
       <div class="btn-group" id="questionGroup" style="display:none;">
         <button class="btn-next btn-yes" onclick="celebrateYes()">¡SÍ, VAMOS POR MÁS! 🚀💖</button>
@@ -457,12 +509,21 @@
 
   </div>
 
-  <!-- MODAL DE FOTOS -->
+  <!-- MODAL DE FOTOS MEJORADO CON NAVEGACIÓN Y MENSAJE SORPRESA -->
   <div class="photo-modal" id="photoModal" onclick="closePhotoModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close-modal" onclick="closePhotoModal()">&times;</span>
-      <img id="modalImg" src="" alt="Foto de recuerdo">
+      
+      <div class="modal-counter" id="modalCounter">Recuerdo 1 de 7</div>
+      
+      <div class="modal-img-container">
+        <button class="nav-arrow nav-prev" onclick="prevPhoto()">❮</button>
+        <img id="modalImg" src="" alt="Foto de recuerdo">
+        <button class="nav-arrow nav-next" onclick="nextPhoto()">❯</button>
+      </div>
+
       <div class="modal-caption" id="modalCaption"></div>
+      <div class="modal-surprise" id="modalSurprise"></div>
     </div>
   </div>
 
@@ -481,7 +542,7 @@
       7: "Siete años han sido solo el comienzo de nuestra historia...\n\n¿Desearías continuar esta gran aventura juntos por mucho más tiempo? 🐾✨"
     };
 
-    // LÓGICA DE REPRODUCCIÓN DESDE EL SEGUNDO 3
+    // LÓGICA DE REPRODUCCIÓN DE MÚSICA DESDE SEGUNDO 3
     let audioStarted = false;
 
     function startMusicAtThreeSeconds() {
@@ -553,25 +614,46 @@
       }
     }
 
+    // DATOS DE FOTOS CON MENSAJES SORPRESA
     const photoData = [
-      { idName: 'foto1', text: '🐾 Recuerdo 1: Un hermoso momento guardado en el corazón.' },
-      { idName: 'foto2', text: '🐾 Recuerdo 2: Una gran aventura que vivimos juntos.' },
-      { idName: 'foto3', text: '🐾 Recuerdo 3: Risas, complicidad e instantes especiales.' },
-      { idName: 'foto4', text: '🐾 Recuerdo 4: Creciendo y apoyándonos en cada paso.' },
-      { idName: 'foto5', text: '🐾 Recuerdo 5: Construyendo nuestro propio lugar seguro.' },
-      { idName: 'foto6', text: '🐾 Recuerdo 6: Un detalle inolvidable en nuestra historia.' },
-      { idName: 'foto7', text: '🐾 Recuerdo 7: Celebrando nuestro amor día a día.' }
+      { text: '🐾 Recuerdo 1: Un hermoso momento guardado en el corazón.', surprise: '💡 Dato curioso: En esta foto supe que esto duraría para siempre.' },
+      { text: '🐾 Recuerdo 2: Una gran aventura que vivimos juntos.', surprise: '✨ Mensaje michi: ¡Qué bien nos la pasamos ese día!' },
+      { text: '🐾 Recuerdo 3: Risas, complicidad e instantes especiales.', surprise: '💖 Nota secreta: Amo cómo te ves cuando sonríes así.' },
+      { text: '🐾 Recuerdo 4: Creciendo y apoyándonos en cada paso.', surprise: '🌟 Detalle: Tu compañía hace que todo valga la pena.' },
+      { text: '🐾 Recuerdo 5: Construyendo nuestro propio lugar seguro.', surprise: '🏡 Pensamiento: Mi hogar siempre será a tu lado.' },
+      { text: '🐾 Recuerdo 6: Un detalle inolvidable en nuestra historia.', surprise: '💕 Promesa: Repetiría este día mil veces más.' },
+      { text: '🐾 Recuerdo 7: Celebrando nuestro amor día a día.', surprise: '👑 Para mi favorita: ¡Eres la reina de esta aventura!' }
     ];
 
+    let currentPhotoIndex = 0;
+
     function openPhotoModal(index) {
-      const modal = document.getElementById('photoModal');
+      currentPhotoIndex = index;
+      updateModalContent();
+      document.getElementById('photoModal').style.display = 'flex';
+    }
+
+    function updateModalContent() {
       const modalImg = document.getElementById('modalImg');
       const modalCaption = document.getElementById('modalCaption');
-      
-      const thumbImg = document.getElementById('thumb' + index);
+      const modalSurprise = document.getElementById('modalSurprise');
+      const modalCounter = document.getElementById('modalCounter');
+
+      const thumbImg = document.getElementById('thumb' + currentPhotoIndex);
       modalImg.src = thumbImg.src;
-      modalCaption.innerHTML = photoData[index].text;
-      modal.style.display = 'flex';
+      modalCaption.innerText = photoData[currentPhotoIndex].text;
+      modalSurprise.innerText = photoData[currentPhotoIndex].surprise;
+      modalCounter.innerText = `Recuerdo ${currentPhotoIndex + 1} de 7`;
+    }
+
+    function nextPhoto() {
+      currentPhotoIndex = (currentPhotoIndex + 1) % photoData.length;
+      updateModalContent();
+    }
+
+    function prevPhoto() {
+      currentPhotoIndex = (currentPhotoIndex - 1 + photoData.length) % photoData.length;
+      updateModalContent();
     }
 
     function closePhotoModal() {
@@ -607,7 +689,7 @@
 
     function goToChapter(num) {
       if (num > 4 && !unlocked) {
-        alert("¡Debes resolver la clave del Capítulo IV para continuar, Gatasha! 🔒🐾");
+        alert("¡Debes resolver el Código Michi del Cap IV para continuar, Gatasha! 🔒🐾");
         return;
       }
 
@@ -633,6 +715,7 @@
       });
     }
 
+    // COMPROBACIÓN DE CLAVE CON CONFETI Y EFECTO VISUAL
     function checkSecret() {
       const val = document.getElementById('secretKey').value.trim().toLowerCase();
       if (val === 'pulgoso') {
@@ -643,8 +726,17 @@
           if (index >= 4) btn.classList.remove('locked');
         });
 
-        alert('¡Sello roto con éxito! Se han desbloqueado los capítulos finales. 📜✨');
-        goToChapter(5);
+        // EFECTO VISUAL DE CELEBRACIÓN (Lluvia masiva de confeti)
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.5 }
+        });
+
+        setTimeout(() => {
+          goToChapter(5);
+        }, 800);
+
       } else {
         document.getElementById('errorMsg').style.display = 'block';
       }
