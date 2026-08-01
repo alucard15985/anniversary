@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuestro Rincón Especial 🐈📜</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Nuestro Rincón Especial 🐈📜❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-color: #2b262d; /* Fondo oscuro elegante */
-      --paper-bg: #f7f1e3; /* Fondo estilo pergamino / papel antiguo */
-      --ink-color: #2c2c54; /* Color tinta azul/negra */
-      --accent-color: #d1ccc0;
+      --bg-color: #1a1423; /* Fondo noche estrellada / íntimo */
+      --paper-bg: #fbf7ee; /* Pergamino cálido */
+      --ink-color: #2b1b17; /* Tinta café borgoña profundo */
+      --accent-color: #b33939; /* Rojo romántico sutil */
     }
 
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--bg-color);
+      background-image: radial-gradient(rgba(255, 215, 0, 0.08) 1px, transparent 0);
+      background-size: 30px 30px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -25,18 +27,32 @@
       padding: 20px;
       color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
 
-    /* Gatos Animados en Fondo */
-    .cat-bg {
+    /* --- SISTEMA DE GATOS ESPORÁDICOS --- */
+    .random-cat {
       position: fixed;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.3;
+      z-index: 2;
+      font-size: 2rem;
+      opacity: 0;
+      transition: all 1s ease-in-out;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
     }
-    .cat-corner { bottom: -10px; left: -10px; width: 90px; }
 
-    /* Navegación por Capítulos */
+    .cat-appear {
+      animation: popAndFade 4s ease-in-out forwards;
+    }
+
+    @keyframes popAndFade {
+      0% { opacity: 0; transform: scale(0.5) translateY(10px); }
+      20% { opacity: 0.9; transform: scale(1.1) translateY(0); }
+      80% { opacity: 0.9; transform: scale(1) translateY(-10px); }
+      100% { opacity: 0; transform: scale(0.8) translateY(-20px); }
+    }
+
+    /* --- NAVEGACIÓN Y ESTRUCTURA --- */
     .nav-tabs {
       display: flex;
       gap: 10px;
@@ -48,20 +64,21 @@
     }
 
     .tab-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 215, 0, 0.2);
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 0.85rem;
-      color: #d1ccc0;
+      color: #e0d0b0;
       cursor: pointer;
       transition: all 0.3s;
     }
 
     .tab-btn.active {
-      background: #f7f1e3;
+      background: var(--paper-bg);
       color: var(--ink-color);
       font-weight: 600;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
     }
 
     .tab-btn.locked {
@@ -69,7 +86,7 @@
       cursor: not-allowed;
     }
 
-    /* Hoja de Pergamino / Manuscrito */
+    /* --- PERGAMINO ROMÁNTICO --- */
     .manuscript-container {
       position: relative;
       z-index: 5;
@@ -77,49 +94,52 @@
       width: 100%;
       background: var(--paper-bg);
       color: var(--ink-color);
-      border-radius: 12px;
-      padding: 40px 35px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 80px rgba(139, 69, 19, 0.15);
-      min-height: 480px;
+      border-radius: 16px;
+      padding: 45px 35px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 90px rgba(139, 69, 19, 0.12), 0 0 20px rgba(255, 215, 0, 0.1);
+      min-height: 500px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border: 1px solid #e0d0b0;
+      border: 1px solid #e2d1b0;
     }
 
     .chapter { display: none; }
     .chapter.active { display: block; }
 
-    /* Fuente de Manuscrito hecho a mano */
-    h1, h2 {
-      font-family: 'Caveat', cursive;
-      font-size: 3rem;
-      color: #1b1464;
+    /* Tipografía Romántica */
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: var(--accent-color);
       margin-bottom: 15px;
       text-align: center;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
 
     .typewriter-text {
       font-family: 'Caveat', cursive;
-      font-size: 1.7rem;
-      line-height: 1.6;
-      min-height: 120px;
+      font-size: 1.8rem;
+      line-height: 1.7;
+      min-height: 140px;
       text-align: left;
-      white-space: pre-wrap; /* Mantiene saltos de línea */
+      white-space: pre-wrap;
+      color: var(--ink-color);
     }
 
-    /* Cursor parpadeante como pluma */
     .cursor {
       display: inline-block;
-      width: 3px;
-      background-color: var(--ink-color);
-      margin-left: 2px;
-      animation: blink 0.7s infinite;
+      width: 2px;
+      height: 1.5rem;
+      background-color: var(--accent-color);
+      margin-left: 3px;
+      animation: blink 0.8s infinite;
+      vertical-align: middle;
     }
 
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* Tarjetas e Inputs dentro del Pergamino */
+    /* Elementos Interactivos */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -128,42 +148,41 @@
     }
 
     .card-item {
-      background: rgba(0,0,0,0.04);
+      background: rgba(179, 57, 57, 0.05);
       padding: 15px;
-      border-radius: 8px;
-      border: 1px dashed #b8e994;
+      border-radius: 10px;
+      border: 1px dashed var(--accent-color);
       font-family: 'Caveat', cursive;
       font-size: 1.4rem;
       cursor: pointer;
       text-align: center;
       transition: all 0.3s;
+      color: var(--ink-color);
     }
 
-    .card-item:hover { background: rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .card-item:hover { background: rgba(179, 57, 57, 0.12); transform: translateY(-3px); }
 
-    .secret-box {
-      margin-top: 20px;
-      text-align: center;
-    }
+    .secret-box { margin-top: 20px; text-align: center; }
 
     .secret-input {
       font-family: 'Caveat', cursive;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       padding: 8px;
       background: transparent;
       border: none;
-      border-bottom: 2px solid var(--ink-color);
+      border-bottom: 2px solid var(--accent-color);
       outline: none;
       text-align: center;
-      width: 200px;
+      width: 220px;
+      color: var(--ink-color);
     }
 
-    /* Botones de Manuscrito */
+    /* Botones */
     .btn-next {
-      background: var(--ink-color);
-      color: #f7f1e3;
+      background: var(--accent-color);
+      color: #fff;
       border: none;
-      padding: 10px 25px;
+      padding: 12px 30px;
       border-radius: 25px;
       font-family: 'Poppins', sans-serif;
       font-size: 0.9rem;
@@ -171,9 +190,10 @@
       margin-top: 25px;
       align-self: center;
       transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(179, 57, 57, 0.3);
     }
 
-    .btn-next:hover { opacity: 0.9; transform: scale(1.03); }
+    .btn-next:hover { opacity: 0.9; transform: scale(1.04); }
 
     .btn-group {
       display: flex;
@@ -184,17 +204,14 @@
       min-height: 60px;
     }
 
-    .btn-yes { background: #27ae60; color: white; }
-    .btn-no { background: #7f8c8d; color: white; position: absolute; }
+    .btn-yes { background: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
+    .btn-no { background: #7f8c8d; position: absolute; }
 
   </style>
 </head>
 <body>
 
-  <!-- Gato Silueta Esquina -->
-  <img src="https://openclipart.org/download/218116/Gato-silueta-2.svg" class="cat-bg cat-corner" alt="Gato">
-
-  <!-- Navegación por Capítulos -->
+  <!-- Navegación -->
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="goToChapter(1)">Inicio 📜</button>
     <button class="tab-btn" onclick="goToChapter(2)">Cap II</button>
@@ -205,19 +222,19 @@
     <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Cierre 🎁</button>
   </div>
 
-  <!-- Hoja de Pergamino -->
+  <!-- Manuscrito Pergamino -->
   <div class="manuscript-container">
     
     <!-- Capítulo 1 -->
     <div class="chapter active" id="cap1">
-      <h1>Capítulo I: El Comienzo 🐾</h1>
+      <h1>Capítulo I: El Comienzo 🌹</h1>
       <div class="typewriter-text" id="text1"></div>
       <button class="btn-next" onclick="goToChapter(2)">Paso a la siguiente página ➔</button>
     </div>
 
     <!-- Capítulo 2 -->
     <div class="chapter" id="cap2">
-      <h1>Capítulo II: El Tiempo ⌛</h1>
+      <h1>Capítulo II: El Tiempo ⏳</h1>
       <div class="typewriter-text" id="text2"></div>
       <button class="btn-next" onclick="goToChapter(3)">Continuar leyendo ➔</button>
     </div>
@@ -239,11 +256,11 @@
       <h1>Capítulo IV: El Sello Secreto 🔐</h1>
       <div class="typewriter-text" id="text4"></div>
       <div class="secret-box" id="secretBox" style="display:none;">
-        <input type="text" id="secretKey" class="secret-input" placeholder="Escribe aquí..." autocomplete="off">
+        <input type="text" id="secretKey" class="secret-input" placeholder="Escribe la clave..." autocomplete="off">
         <br>
         <button class="btn-next" onclick="checkSecret()">Romper el sello 🔑</button>
       </div>
-      <p id="errorMsg" style="color: #c0392b; font-family: 'Caveat'; font-size: 1.4rem; display: none; text-align:center; margin-top:10px;">¡Ese no es el sello secreto! Intenta de nuevo 🐱</p>
+      <p id="errorMsg" style="color: #b33939; font-family: 'Caveat'; font-size: 1.5rem; display: none; text-align:center; margin-top:10px;">¡Ese no es el sello secreto! Intenta de nuevo 🐱</p>
     </div>
 
     <!-- Capítulo 5 -->
@@ -255,7 +272,7 @@
 
     <!-- Capítulo 6 -->
     <div class="chapter" id="cap6">
-      <h1>Capítulo VI: La Carta 💌</h1>
+      <h1>Capítulo VI: Carta Especial 💌</h1>
       <div class="typewriter-text" id="text6"></div>
       <button class="btn-next" onclick="goToChapter(7)">Llegar al final 🎁</button>
     </div>
@@ -277,27 +294,37 @@
   </audio>
 
   <script>
-    // Textos para la narración manuscrita
+    // Historias con un tono más pausado y romántico
     const stories = {
-      1: "Había una vez, un espacio pensado para guardar pequeños fragmentos de nuestra historia...\n\nMenos convencional, más sincero y con el toque exacto de nosotros. Bienvenido a nuestro pergamino digital.",
-      2: "Dicen que el tiempo vuela, pero a tu lado no solo pasan los días: se construyen recuerdos.\n\nCada hora, cada risa y cada pequeño 'miau' compartido ha hecho que este camino valga la pena.",
-      3: "Toca las notas guardadas en este pergamino para revelar fragmentos de nuestros mejores momentos:",
-      4: "Para continuar leyendo las páginas restantes de este manuscrito, escribe nuestra palabra secreta de reconocimiento en caso de emergencias:",
-      5: "Razones para quererte:\n\n• Por tu forma única de iluminar el día.\n• Por cómo escuchas siempre con paciencia.\n• Por tu complicidad y risas compartidas.\n• Por ser, simplemente, tú.",
-      6: "Querida persona especial,\n\nQuería construir este manuscrito para recordarte lo mucho que significas para mí. Gracias por acompañarme, por cada detalle y por hacer que cada día sea único.\n\nCon todo mi cariño ❤️",
-      7: "Y así llegamos a la última página de este capítulo...\n\n¿Aceptas tener una cita especial conmigo este fin de semana?"
+      1: "Había una vez, un rincón creado únicamente para nosotros...\n\nUn pequeño libro digital para detener el tiempo y recordar lo bonito que es caminar juntos. Bienvenido a nuestras páginas.",
+      2: "Dicen que el tiempo vuela cuando uno es feliz...\n\nPero contigo no solo pasan los minutos, se guardan miradas, risas compartidas y momentos que se quedan grabados para siempre.",
+      3: "Toca suavemente cada nota guardada en este pergamino para revivir fragmentos de nuestra historia:",
+      4: "Para abrir las páginas secretas que guardan lo más especial, escribe nuestra palabra secreta de reconocimiento:",
+      5: "Razones para quererte cada día:\n\n• Por tu forma única de iluminar mis días.\n• Por tu paciencia y la calidez de tus abrazos.\n• Por cada risa, cada 'miau' y cada silencio cómodo.\n• Por ser, simplemente, mi persona favorita.",
+      6: "Querida persona especial,\n\nQuería construir este manuscrito para recordarte lo infinitamente importante que eres para mí. Gracias por estar, por cuidar de nosotros y por hacer que la vida sea más bonita a tu lado.\n\nCon todo mi amor ❤️",
+      7: "Y así llegamos a la última hoja de este capítulo...\n\n¿Aceptas tener una cita especial y mágica conmigo este fin de semana?"
     };
+
+    // Colección de Gatitos de Distintos Colores y Tipos
+    const catIcons = [
+      '🐈‍⬛', // Gato Negro
+      '🐈',   // Gato Naranja / Calicó
+      '🐱',   // Carita de Gato
+      '🐾',   // Patita
+      '🖤',   // Corazón Oscuro
+      '🤍',   // Corazón Blanco
+      '🤎'    // Corazón Café
+    ];
 
     let unlocked = false;
     let typingTimeout;
 
-    // Efecto Narración Letra por Letra
-    function typeWriter(text, elementId, speed = 35, callback = null) {
+    // Velocidad más lenta: 65 milisegundos por letra (antes era 30ms)
+    function typeWriter(text, elementId, speed = 65, callback = null) {
       const container = document.getElementById(elementId);
       container.innerHTML = '';
       let i = 0;
 
-      // Crear cursor
       const cursor = document.createElement('span');
       cursor.className = 'cursor';
 
@@ -322,21 +349,18 @@
 
       clearTimeout(typingTimeout);
 
-      // Cambiar visibilidad
       document.querySelectorAll('.chapter').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
       document.getElementById('cap' + num).classList.add('active');
       document.querySelectorAll('.tab-btn')[num - 1].classList.add('active');
 
-      // Ocultar elementos interactivos secundarios antes de escribir
       if(num === 3) document.getElementById('cardsGrid').style.display = 'none';
       if(num === 4) document.getElementById('secretBox').style.display = 'none';
       if(num === 7) document.getElementById('questionGroup').style.display = 'none';
 
-      // Iniciar efecto de escritura manuscrita
-      typeWriter(stories[num], 'text' + num, 30, () => {
-        // Mostrar elementos interactivos tras terminar de escribir
+      // Transición de texto lento y romántico
+      typeWriter(stories[num], 'text' + num, 65, () => {
         if(num === 3) document.getElementById('cardsGrid').style.display = 'grid';
         if(num === 4) document.getElementById('secretBox').style.display = 'block';
         if(num === 7) document.getElementById('questionGroup').style.display = 'flex';
@@ -360,7 +384,36 @@
       }
     }
 
-    // Botón No Juguetón
+    // Generador de Gatos Esporádicos por la Pantalla
+    function spawnRandomCat() {
+      const cat = document.createElement('div');
+      cat.className = 'random-cat cat-appear';
+      
+      // Elegir un icono/gato aleatorio de la lista
+      const randomIcon = catIcons[Math.floor(Math.random() * catIcons.length)];
+      cat.innerHTML = randomIcon + '💕';
+
+      // Posición aleatoria en la pantalla
+      const posX = Math.random() * (window.innerWidth - 60);
+      const posY = Math.random() * (window.innerHeight - 60);
+
+      cat.style.left = posX + 'px';
+      cat.style.top = posY + 'px';
+
+      document.body.appendChild(cat);
+
+      // Eliminar el elemento después de que termina la animación (4s)
+      setTimeout(() => {
+        cat.remove();
+      }, 4000);
+    }
+
+    // Aparece un gato de forma aleatoria cada 3.5 a 6 segundos
+    setInterval(() => {
+      spawnRandomCat();
+    }, Math.random() * 2500 + 3500);
+
+    // Botón "No" Juguetón
     const meow = document.getElementById('meowSound');
     function moveNoButton() {
       meow.play().catch(() => {});
@@ -372,7 +425,6 @@
       btnNo.style.top = y + 'px';
     }
 
-    // Iniciar Capítulo 1 al cargar
     window.onload = () => {
       goToChapter(1);
     };
