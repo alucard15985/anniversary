@@ -3,27 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuestra Historia ❤️</title>
+  <title>Nuestro Rincón Especial 🐈❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg-color: #fafafa; /* Crema muy suave */
+      --main-color: #1a237e; /* Azul Marino Profundo (más moderno) */
+      --accent-color: #fbc02d; /* Dorado Suave */
+      --card-bg: #ffffff;
+      --text-color: #333333;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+      background-color: var(--bg-color);
+      background-image: radial-gradient(var(--accent-color) 0.5px, transparent 0.5px), radial-gradient(var(--accent-color) 0.5px, #fafafa 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0,10px 10px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
-      color: #4a4a4a;
+      color: var(--text-color);
+      overflow-x: hidden;
     }
 
-    /* Navegación por Pestañas / Capítulos */
+    /* --- GATOS ANIMADOS DE FONDO --- */
+    .cat-bg {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    /* Gato que asoma abajo a la izquierda */
+    .cat-corner {
+      bottom: -10px;
+      left: -10px;
+      width: 100px;
+      animation: catPeek 10s ease-in-out infinite;
+    }
+
+    /* Gato que flota arriba a la derecha */
+    .cat-float {
+      top: 50px;
+      right: 50px;
+      width: 60px;
+      animation: catFloat 15s linear infinite;
+    }
+
+    @keyframes catPeek {
+      0%, 100% { transform: translate(-20px, 20px) rotate(-10deg); }
+      20%, 80% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-10px, 10px) rotate(-5deg); }
+    }
+
+    @keyframes catFloat {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-100vh) translateX(50px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Gatos flotantes adicionales (JS) */
+    .floating-cat-js {
+      position: absolute;
+      font-size: 24px;
+      color: rgba(26, 35, 126, 0.4);
+      animation: floatCatJS 8s linear infinite;
+    }
+
+    @keyframes floatCatJS {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* --- NAVEGACIÓN Y CONTENEDOR --- */
     .nav-tabs {
       display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 25px;
       flex-wrap: wrap;
       justify-content: center;
       max-width: 700px;
@@ -31,235 +93,282 @@
     }
 
     .tab-btn {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid #f48fb1;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
+      background: #e0e0e0;
+      border: 1px solid #ccc;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 0.9rem;
       font-weight: 600;
-      color: #d81b60;
+      color: #555;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .tab-btn.active {
-      background: #d81b60;
+      background: var(--main-color);
       color: white;
-      box-shadow: 0 4px 10px rgba(216, 27, 96, 0.3);
+      border-color: var(--main-color);
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
     }
 
     .tab-btn.locked {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
-      background: #e0e0e0;
-      color: #888;
-      border-color: #ccc;
+      background: #d6d6d6;
     }
 
-    /* Contenedor del Libro */
     .book-container {
       position: relative;
-      z-index: 10;
+      z-index: 5;
       max-width: 650px;
       width: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      padding: 35px 25px;
-      box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
-      min-height: 400px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(5px);
+      border-radius: 28px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      min-height: 450px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: center;
+      border: 2px solid #eeeeee;
     }
 
-    .chapter { display: none; animation: fadeIn 0.5s ease forwards; }
+    .chapter { display: none; animation: slideIn 0.5s ease-out forwards; }
     .chapter.active { display: block; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    h1, h2 {
-      font-family: 'Dancing Script', cursive;
-      color: #d81b60;
-    }
+    h1, h2 { font-family: 'Dancing Script', cursive; color: var(--main-color); }
+    h1 { font-size: 3.2rem; margin-bottom: 15px; }
+    h2 { font-size: 2.5rem; margin-bottom: 20px; }
 
-    h1 { font-size: 3rem; margin-bottom: 10px; }
-    h2 { font-size: 2.3rem; margin-bottom: 15px; }
-
-    /* Estilos del Secreto (Capítulo 4) */
-    .secret-box {
-      background: #fff0f5;
-      padding: 20px;
-      border-radius: 15px;
-      border: 2px dashed #f48fb1;
-      margin-top: 15px;
-    }
-
-    .secret-input {
-      padding: 12px;
-      border: 2px solid #f48fb1;
-      border-radius: 25px;
-      text-align: center;
-      font-size: 1rem;
-      outline: none;
-      margin: 15px 0;
-      width: 80%;
-      max-width: 250px;
-    }
-
-    /* Tarjetas Interactivas (Capítulo 3) */
+    /* --- CAPÍTULOS ESPECÍFICOS --- */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 18px;
+      margin-top: 25px;
     }
 
     .card-item {
-      background: #fce4ec;
-      padding: 20px 10px;
-      border-radius: 15px;
+      background: #f1f8e9; /* Verde muy suave */
+      padding: 25px 15px;
+      border-radius: 18px;
       cursor: pointer;
-      transition: transform 0.3s;
-      color: #c2185b;
+      transition: all 0.3s;
+      color: #33691e;
       font-weight: 600;
-      font-size: 0.9rem;
+      border: 1px solid #dcedc8;
     }
 
-    .card-item:hover { transform: scale(1.05); background: #f8bbd0; }
+    .card-item:hover { transform: translateY(-5px); background: #dcedc8; }
 
-    /* Botones de Acción */
+    .secret-box {
+      background: #f5f5f5;
+      padding: 25px;
+      border-radius: 20px;
+      border: 2px solid #e0e0e0;
+      margin-top: 20px;
+    }
+
+    .secret-input {
+      padding: 14px;
+      border: 2px solid var(--accent-color);
+      border-radius: 30px;
+      text-align: center;
+      font-size: 1.1rem;
+      outline: none;
+      margin: 20px 0;
+      width: 85%;
+      max-width: 280px;
+    }
+
+    /* --- BOTONES Y "NO" GATO --- */
     .btn-next {
-      background: #e91e63;
+      background: var(--main-color);
       color: white;
       border: none;
-      padding: 10px 25px;
+      padding: 12px 30px;
       border-radius: 50px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 20px;
-      transition: background 0.3s;
+      margin-top: 25px;
+      transition: all 0.3s;
+      font-size: 1rem;
     }
 
-    .btn-next:hover { background: #c2185b; }
+    .btn-next:hover { background: #0d1a6e; transform: scale(1.03); }
 
-    /* Botón Juguetón (Capítulo 7) */
     .btn-group {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      margin-top: 25px;
+      gap: 25px;
+      margin-top: 30px;
       position: relative;
-      min-height: 60px;
+      min-height: 80px;
     }
 
     .btn-yes { background: #4caf50; color: white; }
-    .btn-no { background: #e0e0e0; color: #666; position: absolute; }
+    .btn-no {
+      background: #e0e0e0;
+      color: #555;
+      position: absolute;
+      transition: all 0.2s ease; /* Más rápido */
+    }
+
+    /* Animación del gato asomando en el NO */
+    #catNoReveal {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 80px;
+      z-index: 100;
+      animation: catPeekNo 1.5s ease-out;
+    }
+
+    @keyframes catPeekNo {
+      0% { transform: translateY(100px) rotate(20deg); opacity: 0; }
+      30% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      70% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100px) rotate(-20deg); opacity: 0; }
+    }
+
   </style>
 </head>
 <body>
 
+  <!-- Elementos de Fondo: Gatos Animados -->
+  <!-- Reemplaza estas URLs con SVGs o imágenes de gatos si tienes -->
+  <img src="https://openclipart.org/download/218116/Gato-silueta-2.svg" class="cat-bg cat-corner" alt="Gato esquina">
+  <img src="https://openclipart.org/download/123491/Gato-dibujo-1.svg" class="cat-bg cat-float" alt="Gato flotante">
+
   <!-- Navegación por Capítulos -->
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="goToChapter(1)">Cap 1</button>
+    <button class="tab-btn active" onclick="goToChapter(1)">Inicio 🐈</button>
     <button class="tab-btn" onclick="goToChapter(2)">Cap 2</button>
     <button class="tab-btn" onclick="goToChapter(3)">Cap 3</button>
     <button class="tab-btn" onclick="goToChapter(4)">Cap 4 🔒</button>
     <button class="tab-btn locked" id="tab5" onclick="goToChapter(5)">Cap 5 🔒</button>
     <button class="tab-btn locked" id="tab6" onclick="goToChapter(6)">Cap 6 🔒</button>
-    <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Cap 7 🔒</button>
+    <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Cierre 🎁</button>
   </div>
 
   <div class="book-container">
     
     <!-- Capítulo 1: Portada -->
     <div class="chapter active" id="cap1">
-      <h1>Nuestra Historia ❤️</h1>
-      <p>Un pequeño libro virtual dedicado especialmente a ti.</p>
-      <p style="margin-top: 15px; font-style: italic; color: #888;">Haz clic en el botón de abajo para comenzar nuestro recorrido.</p>
-      <button class="btn-next" onclick="goToChapter(2)">Abrir Libro 📖</button>
+      <h1>Nuestro Rincón 🐾</h1>
+      <p>Un pequeño espacio dedicado a nuestra historia. Menos rosa, más nosotros.</p>
+      <p style="margin-top: 18px; font-style: italic; color: #777;">Haz clic para comenzar el recorrido.</p>
+      <button class="btn-next" onclick="goToChapter(2)">Abrir 📖</button>
     </div>
 
     <!-- Capítulo 2: Tiempo Juntos -->
     <div class="chapter" id="cap2">
-      <h2>Capítulo 2: El Tiempo Vuela... ✨</h2>
-      <p>Cada segundo a tu lado cuenta, y desde que comenzó nuestra historia han pasado momentos increíbles.</p>
-      <div style="margin: 25px 0; font-size: 1.2rem; font-weight: 600; color: #ad1457;">
-        ⏳ "El tiempo no se mide en días, sino en momentos compartidos contigo."
+      <h2>Capítulo 2: Cada Segundo ✨</h2>
+      <p>Desde que empezamos, el tiempo se siente diferente. No solo sumamos días, sumamos recuerdos.</p>
+      <div style="margin: 30px 0; font-size: 1.3rem; font-weight: 600; color: var(--main-color); font-style: italic;">
+        ⏳ "Contigo, incluso un 'miau' dura una eternidad feliz."
       </div>
-      <button class="btn-next" onclick="goToChapter(3)">Siguiente Capítulo ➔</button>
+      <button class="btn-next" onclick="goToChapter(3)">Siguiente ➔</button>
     </div>
 
     <!-- Capítulo 3: Recuerdos -->
     <div class="chapter" id="cap3">
       <h2>Capítulo 3: Momentos Inolvidables 📸</h2>
-      <p>Haz clic en las tarjetas para descubrir pequeños recuerdos:</p>
+      <p>Haz clic en estas tarjetas para descubrir pequeños detalles:</p>
       <div class="cards-grid">
-        <div class="card-item" onclick="alert('Nuestra primera cita ☕')">Recuerdo 1</div>
-        <div class="card-item" onclick="alert('Esa risa inolvidable 😂')">Recuerdo 2</div>
-        <div class="card-item" onclick="alert('Nuestro lugar favorito 🌟')">Recuerdo 3</div>
+        <div class="card-item" onclick="catAlert('Esa primera vez... ☕')">Recuerdo 1</div>
+        <div class="card-item" onclick="catAlert('Nuestra canción favorita 🎶')">Recuerdo 2</div>
+        <div class="card-item" onclick="catAlert('Esa risa que amo 😂')">Recuerdo 3</div>
+        <div class="card-item" onclick="catAlert('Un día cualquiera, perfecto 🌟')">Recuerdo 4</div>
       </div>
-      <button class="btn-next" onclick="goToChapter(4)" style="margin-top: 25px;">Siguiente Capítulo ➔</button>
+      <button class="btn-next" onclick="goToChapter(4)" style="margin-top: 30px;">Siguiente ➔</button>
     </div>
 
     <!-- Capítulo 4: Punto de Bloqueo -->
     <div class="chapter" id="cap4">
-      <h2>Capítulo 4: Acceso Restringido 🔐</h2>
+      <h2>Capítulo 4: Solo Para Nosotros 🔐</h2>
       <div class="secret-box">
         <p><strong>Para continuar escribe nuestra palabra secreta de reconocimiento en caso de emergencias.</strong></p>
-        <input type="text" id="secretKey" class="secret-input" placeholder="Escribe aquí..." autocomplete="off">
+        <input type="text" id="secretKey" class="secret-input" placeholder="p_ _ _ _ _o" autocomplete="off">
         <br>
         <button class="btn-next" onclick="checkSecret()">Desbloquear 🔑</button>
       </div>
-      <p id="errorMsg" style="color: red; margin-top: 10px; display: none;">¡Palabra incorrecta! Pista: Es súper tierna 😜</p>
+      <p id="errorMsg" style="color: #b71c1c; margin-top: 15px; display: none;">¡Casi! Pista: Es súper tierno y suave 😜</p>
     </div>
 
-    <!-- Capítulo 5: Razones por las que te quiero -->
+    <!-- Capítulo 5: Razones -->
     <div class="chapter" id="cap5">
-      <h2>Capítulo 5: Razones para Quererte 💖</h2>
-      <ul style="list-style: none; text-align: left; max-width: 400px; margin: 0 auto; line-height: 2;">
-        <li>✨ Por tu sonrisa que ilumina cualquier día.</li>
-        <li>✨ Por tu forma de escucharme siempre.</li>
-        <li>✨ Por todos los momentos divertidos juntos.</li>
-        <li>✨ Por ser simplemente tú.</li>
+      <h2>Capítulo 5: Por Qué Eres Especial 💖</h2>
+      <ul style="list-style: none; text-align: left; max-width: 430px; margin: 0 auto; line-height: 2.2;">
+        <li>🐾 Por esa forma única que tienes de sonreír.</li>
+        <li>🐾 Por cómo escuchas, incluso mis silencios.</li>
+        <li>🐾 Por todos los 'miau' y risas compartidas.</li>
+        <li>🐾 Por ser, simplemente, mi persona favorita.</li>
       </ul>
-      <button class="btn-next" onclick="goToChapter(6)">Siguiente Capítulo ➔</button>
+      <button class="btn-next" onclick="goToChapter(6)">Siguiente ➔</button>
     </div>
 
-    <!-- Capítulo 6: Carta de Amor -->
+    <!-- Capítulo 6: Carta -->
     <div class="chapter" id="cap6">
-      <h2>Capítulo 6: Carta Especial 💌</h2>
-      <p style="text-align: left; line-height: 1.8; background: #fffdf9; padding: 20px; border-radius: 12px;">
+      <h2>Capítulo 6: Desde el Corazón 💌</h2>
+      <p style="text-align: left; line-height: 1.9; background: #fafafa; padding: 25px; border-radius: 15px; border: 1px solid #eee;">
         Querida persona especial,<br><br>
-        Quería crear este detalle diferente para recordarte lo importante que eres para mí. Gracias por estar siempre presente y por hacer que cada día sea único.<br><br>
+        Quería crear este detalle diferente, lejos de lo convencional y lleno de pequeños guiños a nuestra complicidad. Gracias por hacer que mi vida sea más alegre, tierna y divertida.<br><br>
         Con todo mi cariño ❤️
       </p>
-      <button class="btn-next" onclick="goToChapter(7)">Ir al Gran Cierre 🎁</button>
+      <button class="btn-next" onclick="goToChapter(7)">Ir al Cierre 🎁</button>
     </div>
 
     <!-- Capítulo 7: El Cierre y La Cita -->
     <div class="chapter" id="cap7">
-      <h2>Capítulo 7: La Pregunta Final 🌹</h2>
+      <h2>Capítulo 7: La Pregunta 🌹</h2>
       <p>¿Aceptas una salida/cita especial conmigo?</p>
       <div class="btn-group">
-        <button class="btn-next btn-yes" onclick="alert('¡Sabía que dirías que sí! ❤️')">¡SÍ! 😍</button>
-        <button class="btn-next btn-no" id="btnNo" onmouseover="moveButton()">No 😜</button>
+        <button class="btn-next btn-yes" onclick="catAlert('¡Sabía que dirías que sí! ❤️ Prepararé algo increíble.')">¡SÍ! 😍</button>
+        <button class="btn-next btn-no" id="btnNo" onmouseover="moveNoButton()" onclick="moveNoButton()">No 🐱</button>
       </div>
     </div>
 
   </div>
 
+  <!-- Gato secreto que aparece en el NO -->
+  <img src="https://openclipart.org/download/218116/Gato-silueta-2.svg" id="catNoReveal" alt="Gato NO">
+
+  <!-- Sonido de Miau (requiere interacción previa para reproducirse en muchos navegadores) -->
+  <audio id="meowSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_145b98a0d4.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     let unlocked = false;
+    const meow = document.getElementById('meowSound');
+    const catNoReveal = document.getElementById('catNoReveal');
+
+    // Generar corazones flotantes
+    const body = document.body;
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-cat-js');
+      heart.innerHTML = (i % 2 === 0) ? '❤️' : '🐾';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+      body.appendChild(heart);
+    }
 
     function goToChapter(num) {
       if (num > 4 && !unlocked) {
-        alert("¡Debes resolver la clave del Capítulo 4 para continuar!");
+        catAlert("¡Debes resolver la clave del Capítulo 4 para continuar! 🔒🐾");
         return;
       }
 
@@ -279,28 +388,64 @@
         document.getElementById('errorMsg').style.display = 'none';
         
         // Desbloquear pestañas
-        document.getElementById('tab5').classList.remove('locked');
-        document.getElementById('tab6').classList.remove('locked');
-        document.getElementById('tab7').classList.remove('locked');
+        document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+          if (index >= 4) btn.classList.remove('locked');
+        });
         
-        document.getElementById('tab5').innerText = 'Cap 5';
-        document.getElementById('tab6').innerText = 'Cap 6';
-        document.getElementById('tab7').innerText = 'Cap 7';
+        // Efecto confeti simple
+        for(let i=0; i<20; i++) {
+          setTimeout(catConfetti, i*50);
+        }
 
-        alert('¡Clave correcta! Se han desbloqueado los últimos capítulos 🎉');
+        catAlert('¡Clave correcta! Se han desbloqueado los últimos capítulos. ¡Miau! 🎉🐾');
         goToChapter(5);
       } else {
         document.getElementById('errorMsg').style.display = 'block';
       }
     }
 
-    function moveButton() {
-      const btnNo = document.getElementById('btnNo');
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
+    // Botón Escapista "No" con MIAU
+    const btnNo = document.getElementById('btnNo');
+    btnNo.style.left = '60%'; // Posición inicial
+
+    function moveNoButton() {
+      // Reproducir Miau (solo funciona si el usuario interactuó antes)
+      meow.play().catch(() => {}); 
+      
+      // Mostrar gato secreto
+      catNoReveal.style.display = 'block';
+      setTimeout(() => catNoReveal.style.display = 'none', 1500);
+
+      // Mover botón
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 80);
       btnNo.style.position = 'fixed';
       btnNo.style.left = x + 'px';
       btnNo.style.top = y + 'px';
+    }
+
+    // Alerta personalizada estilo gato
+    function catAlert(message) {
+      alert("🐾 Miau dice: " + message);
+    }
+
+    // Confeti de gatos/patitas
+    function catConfetti() {
+      const confetti = document.createElement('div');
+      confetti.innerHTML = (Math.random() > 0.5) ? '🐾' : '🐱';
+      confetti.style.position = 'fixed';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = '100vh';
+      confetti.style.fontSize = '20px';
+      confetti.style.zIndex = '1000';
+      confetti.style.transition = 'transform 1.5s ease-out, opacity 1.5s ease-out';
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.style.transform = `translate(${Math.random()*100-50}px, -${Math.random()*100+100}vh) rotate(${Math.random()*360}deg)`;
+        confetti.style.opacity = '0';
+      }, 10);
+      setTimeout(() => confetti.remove(), 1600);
     }
   </script>
 </body>
