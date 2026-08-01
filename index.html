@@ -150,7 +150,7 @@
       border-radius: 16px;
       padding: 40px 30px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 90px rgba(139, 69, 19, 0.12), 0 0 20px rgba(255, 215, 0, 0.1);
-      min-height: 520px;
+      min-height: 540px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -236,7 +236,7 @@
       box-shadow: 0 8px 15px rgba(179, 57, 57, 0.2);
     }
 
-    /* MODAL DE FOTOS MEJORADO CON NAVEGACIÓN Y SORPRESA */
+    /* MODAL DE FOTOS MEJORADO */
     .photo-modal {
       display: none;
       position: fixed;
@@ -379,17 +379,39 @@
 
     .btn-next:hover { opacity: 0.9; transform: scale(1.04); }
 
+    /* CORRECCIÓN DE POSICIONAMIENTO DE BOTONES EN EL ÚLTIMO CAPÍTULO */
     .btn-group {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      align-items: center;
+      gap: 30px;
       margin-top: 25px;
       position: relative;
       min-height: 60px;
+      width: 100%;
     }
 
-    .btn-yes { background: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
-    .btn-no { background: #7f8c8d; position: absolute; }
+    .btn-yes { 
+      background: #27ae60; 
+      box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); 
+      margin-top: 0;
+    }
+    
+    .btn-no { 
+      background: #7f8c8d; 
+      margin-top: 0;
+      position: relative; 
+    }
+
+    /* FIRMA FINAL */
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      text-align: center;
+      margin-top: 25px;
+    }
 
   </style>
 </head>
@@ -406,7 +428,7 @@
     <source src="./musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Navegación con nombres Gatunos / Cómplices -->
+  <!-- Navegación -->
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="goToChapter(1)">Cap I: El Primer Maullido 📜</button>
     <button class="tab-btn" onclick="goToChapter(2)">Cap II: Travesuras ⏳</button>
@@ -414,7 +436,7 @@
     <button class="tab-btn" onclick="goToChapter(4)">Cap IV: Código Michi 🔐</button>
     <button class="tab-btn locked" id="tab5" onclick="goToChapter(5)">Cap V: Mi Favorita 💖</button>
     <button class="tab-btn locked" id="tab6" onclick="goToChapter(6)">Cap VI: Corazón 💌</button>
-    <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Cierre 🎁</button>
+    <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Aventura 🎁</button>
   </div>
 
   <!-- Manuscrito -->
@@ -497,19 +519,22 @@
       <button class="btn-next" onclick="goToChapter(7)">Llegar al final 🎁</button>
     </div>
 
-    <!-- Capítulo 7 -->
+    <!-- Capítulo 7 (Actualizado sin "Cierre:" y con la firma Equipo M&M) -->
     <div class="chapter" id="cap7">
-      <h1>Cierre: ¿Continuamos la Aventura? 🎁</h1>
+      <h1>¿Continuamos la Aventura? 🎁</h1>
       <div class="typewriter-text" id="text7"></div>
       <div class="btn-group" id="questionGroup" style="display:none;">
         <button class="btn-next btn-yes" onclick="celebrateYes()">¡SÍ, VAMOS POR MÁS! 🚀💖</button>
         <button class="btn-next btn-no" id="btnNo" onmouseover="moveNoButton()" onclick="moveNoButton()">No 🐱</button>
       </div>
+      <div class="signature" id="signatureBox" style="display:none;">
+        Equipo M&M ❤️
+      </div>
     </div>
 
   </div>
 
-  <!-- MODAL DE FOTOS MEJORADO CON NAVEGACIÓN Y MENSAJE SORPRESA -->
+  <!-- MODAL DE FOTOS MEJORADO -->
   <div class="photo-modal" id="photoModal" onclick="closePhotoModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close-modal" onclick="closePhotoModal()">&times;</span>
@@ -542,7 +567,7 @@
       7: "Siete años han sido solo el comienzo de nuestra historia...\n\n¿Desearías continuar esta gran aventura juntos por mucho más tiempo? 🐾✨"
     };
 
-    // LÓGICA DE REPRODUCCIÓN DE MÚSICA DESDE SEGUNDO 3
+    // MÚSICA DE FONDO DESDE SEGUNDO 3
     let audioStarted = false;
 
     function startMusicAtThreeSeconds() {
@@ -614,7 +639,6 @@
       }
     }
 
-    // DATOS DE FOTOS CON MENSAJES SORPRESA
     const photoData = [
       { text: '🐾 Recuerdo 1: Un hermoso momento guardado en el corazón.', surprise: '💡 Dato curioso: En esta foto supe que esto duraría para siempre.' },
       { text: '🐾 Recuerdo 2: Una gran aventura que vivimos juntos.', surprise: '✨ Mensaje michi: ¡Qué bien nos la pasamos ese día!' },
@@ -706,16 +730,21 @@
 
       if(num === 3) document.getElementById('cardsGrid').style.display = 'none';
       if(num === 4) document.getElementById('secretBox').style.display = 'none';
-      if(num === 7) document.getElementById('questionGroup').style.display = 'none';
+      if(num === 7) {
+        document.getElementById('questionGroup').style.display = 'none';
+        document.getElementById('signatureBox').style.display = 'none';
+      }
 
       typeWriter(stories[num], 'text' + num, 50, () => {
         if(num === 3) document.getElementById('cardsGrid').style.display = 'grid';
         if(num === 4) document.getElementById('secretBox').style.display = 'block';
-        if(num === 7) document.getElementById('questionGroup').style.display = 'flex';
+        if(num === 7) {
+          document.getElementById('questionGroup').style.display = 'flex';
+          document.getElementById('signatureBox').style.display = 'block';
+        }
       });
     }
 
-    // COMPROBACIÓN DE CLAVE CON CONFETI Y EFECTO VISUAL
     function checkSecret() {
       const val = document.getElementById('secretKey').value.trim().toLowerCase();
       if (val === 'pulgoso') {
@@ -726,7 +755,6 @@
           if (index >= 4) btn.classList.remove('locked');
         });
 
-        // EFECTO VISUAL DE CELEBRACIÓN (Lluvia masiva de confeti)
         confetti({
           particleCount: 150,
           spread: 100,
