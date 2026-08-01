@@ -447,10 +447,10 @@
 
     <!-- Capítulo 7 -->
     <div class="chapter" id="cap7">
-      <h1>Capítulo VII: La Celebración 🌹</h1>
+      <h1>Capítulo VII: La Continuación 🌹</h1>
       <div class="typewriter-text" id="text7"></div>
       <div class="btn-group" id="questionGroup" style="display:none;">
-        <button class="btn-next btn-yes" onclick="celebrateYes()">¡SÍ, ACEPTO! 😍</button>
+        <button class="btn-next btn-yes" onclick="celebrateYes()">¡SÍ, VAMOS POR MÁS! 🚀💖</button>
         <button class="btn-next btn-no" id="btnNo" onmouseover="moveNoButton()" onclick="moveNoButton()">No 🐱</button>
       </div>
     </div>
@@ -477,8 +477,8 @@
       3: "Siete momentos especiales grabados en el corazón. Haz clic en cada recuerdo para revivir parte de nuestra historia:",
       4: "Siete años guardando secretos cómplices, miradas que lo dicen todo y palabras que solo nosotros entendemos.\n\nPara desbloquear las páginas finales de este aniversario, ingresa la palabra secreta:",
       5: "7 Razones por las que te elijo, año tras año:\n\n1. Por tu sonrisa que ilumina mis días como el primer día.\n2. Por la calma y paz que me das siempre.\n3. Por nuestras bromas internas y el amor por los gatitos.\n4. Por cómo hemos crecido juntos sin perder nuestra esencia.\n5. Por tu paciencia infinita y tu hermoso corazón.\n6. Por ser mi lugar seguro en el mundo.\n7. Porque a tu lado, la vida es infinitamente más bonita.",
-      6: "Querida Gatasha,\n\nHoy celebramos 7 años caminando juntos. Mirar nuestro recorrido me llena de un orgullo enorme y de una gratitud profunda. Gracias por tu amor incondicional, por cada abrazo reconfortante y por construir a mi lado esta historia tan bonita.\n\nPrometo seguir cuidando de nosotros, riendo con nuestras locuras y apoyándote siempre.\n\n¡Feliz 7° Aniversario, mi amor! ❤️",
-      7: "Siete años merecen una celebración a la altura de nuestra historia...\n\n¿Aceptas tener una cita mágica e inolvidable conmigo para celebrar nuestros 7 años juntos?"
+      6: "Querida Gatasha,\n\nHoy celebramos 7 años caminando juntos. Mirar nuestro recorrido me llena de un orgullo enorme y de una gratitud profunda. Gracias por tu amor incondicional, por cada abrazo reconfortante y por construir a mi lado esta historia tan bonita.\n\nPrometo seguir cuidando de nosotros, riendo con nuestras locuras y apoyándote siempre.\n\n¡Feliz 7° Aniversario, Miau Asi es! ❤️",
+      7: "Siete años han sido solo el comienzo de nuestra historia...\n\n¿Desearías continuar esta gran aventura juntos por mucho más tiempo? 🐾✨"
     };
 
     // LÓGICA DE REPRODUCCIÓN DESDE EL SEGUNDO 3
@@ -490,7 +490,6 @@
       const bgMusic = document.getElementById('bgMusic');
       bgMusic.volume = 0.4;
 
-      // Establece el tiempo inicial en el segundo 3
       if (bgMusic.currentTime < 3) {
         bgMusic.currentTime = 3;
       }
@@ -500,9 +499,7 @@
         document.getElementById('musicToggleBtn').innerText = '⏸️';
         document.getElementById('musicStatus').innerText = 'Música: Sonando ❤️';
         removeInteractionListeners();
-      }).catch(() => {
-        // Bloqueado por el navegador hasta el primer clic
-      });
+      }).catch(() => {});
     }
 
     function toggleBgMusic(e) {
@@ -533,7 +530,6 @@
       document.removeEventListener('keydown', startMusicAtThreeSeconds);
     }
 
-    // Escuchadores para desbloquear autoplay en el primer toque si el navegador bloquea el arranque en frío
     document.addEventListener('click', startMusicAtThreeSeconds);
     document.addEventListener('touchstart', startMusicAtThreeSeconds);
     document.addEventListener('keydown', startMusicAtThreeSeconds);
@@ -684,7 +680,7 @@
       });
 
       setTimeout(() => {
-        alert('¡Sabía que dirías que sí, Gatasha! ❤️ Prometo una cita de 7° aniversario totalmente inolvidable.');
+        alert('¡Sabía que dirías que sí, Gatasha! ❤️ Prometo una cita de 7° aniversario totalmente inolvidable para celebrar esta gran aventura.');
       }, 500);
     }
 
@@ -702,7 +698,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         goToChapter(1);
-        startMusicAtThreeSeconds(); // Intenta autoplay inmediato en el segundo 3
+        startMusicAtThreeSeconds();
       }, 100);
     });
   </script>
