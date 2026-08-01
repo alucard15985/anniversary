@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7 Años Juntos - Gatasha 🐈📜❤️</title>
-  <!-- Tipografías Opción 1: Dancing Script + Indie Flower -->
+  <!-- Tipografías -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Indie+Flower&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Librería para la Lluvia de Confeti al decir SÍ -->
+  <!-- Confeti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-color: #1a1423; /* Fondo noche estrellada e íntimo */
-      --paper-bg: #fbf7ee; /* Pergamino cálido */
-      --ink-color: #2b1b17; /* Tinta borgoña/café profundo */
-      --accent-color: #b33939; /* Rojo romántico sutil */
+      --bg-color: #1a1423;
+      --paper-bg: #fbf7ee;
+      --ink-color: #2b1b17;
+      --accent-color: #b33939;
     }
 
     body {
@@ -34,7 +34,7 @@
       position: relative;
     }
 
-    /* --- SISTEMA DE GATOS ESPORÁDICOS --- */
+    /* GATOS ESPORÁDICOS */
     .random-cat {
       position: fixed;
       pointer-events: none;
@@ -56,7 +56,7 @@
       100% { opacity: 0; transform: scale(0.8) translateY(-20px); }
     }
 
-    /* --- NAVEGACIÓN Y ESTRUCTURA --- */
+    /* NAVEGACIÓN */
     .nav-tabs {
       display: flex;
       gap: 10px;
@@ -90,7 +90,7 @@
       cursor: not-allowed;
     }
 
-    /* --- PERGAMINO ROMÁNTICO --- */
+    /* PERGAMINO */
     .manuscript-container {
       position: relative;
       z-index: 5;
@@ -111,7 +111,6 @@
     .chapter { display: none; }
     .chapter.active { display: block; }
 
-    /* Títulos */
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 3.2rem;
@@ -122,7 +121,6 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
     }
 
-    /* Texto Narrativo */
     .typewriter-text {
       font-family: 'Indie Flower', cursive;
       font-size: 1.6rem;
@@ -146,7 +144,7 @@
 
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* GRID DE FOTOS EN EL CAPÍTULO 3 */
+    /* GRID DE FOTOS EN CAPÍTULO 3 */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -162,10 +160,10 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       cursor: pointer;
       text-align: center;
-      transition: all 0.3s;
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: all 0.3s;
     }
 
     .card-item img {
@@ -174,6 +172,7 @@
       object-fit: cover;
       border-radius: 6px;
       margin-bottom: 6px;
+      background-color: #f0e6d2;
     }
 
     .card-item span {
@@ -188,7 +187,7 @@
       box-shadow: 0 8px 15px rgba(179, 57, 57, 0.2);
     }
 
-    /* MODAL DE FOTOS (VENTANA FLOTANTE) */
+    /* MODAL DE FOTOS */
     .photo-modal {
       display: none;
       position: fixed;
@@ -222,11 +221,12 @@
 
     .modal-content img {
       max-width: 100%;
-      max-height: 300px;
+      max-height: 320px;
       border-radius: 10px;
       object-fit: contain;
       margin-bottom: 15px;
       border: 1px solid #ddd;
+      background-color: #f0e6d2;
     }
 
     .modal-caption {
@@ -261,7 +261,6 @@
       color: var(--ink-color);
     }
 
-    /* Botones */
     .btn-next {
       background: var(--accent-color);
       color: #fff;
@@ -306,7 +305,7 @@
     <button class="tab-btn locked" id="tab7" onclick="goToChapter(7)">Cierre 🎁</button>
   </div>
 
-  <!-- Manuscrito Pergamino -->
+  <!-- Manuscrito -->
   <div class="manuscript-container">
     
     <!-- Capítulo 1 -->
@@ -329,31 +328,31 @@
       <div class="typewriter-text" id="text3"></div>
       <div class="cards-grid" id="cardsGrid" style="display:none;">
         <div class="card-item" onclick="openPhotoModal(0)">
-          <img src="foto1.jpg" alt="Recuerdo 1" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+1'">
+          <img id="thumb0" src="./foto1.jpg" alt="Recuerdo 1" onerror="handleImgError(this, 'foto1')">
           <span>Recuerdo 1 💖</span>
         </div>
         <div class="card-item" onclick="openPhotoModal(1)">
-          <img src="foto2.jpg" alt="Recuerdo 2" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+2'">
+          <img id="thumb1" src="./foto2.jpg" alt="Recuerdo 2" onerror="handleImgError(this, 'foto2')">
           <span>Recuerdo 2 ✨</span>
         </div>
         <div class="card-item" onclick="openPhotoModal(2)">
-          <img src="foto3.jpg" alt="Recuerdo 3" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+3'">
+          <img id="thumb2" src="./foto3.jpg" alt="Recuerdo 3" onerror="handleImgError(this, 'foto3')">
           <span>Recuerdo 3 🐾</span>
         </div>
         <div class="card-item" onclick="openPhotoModal(3)">
-          <img src="foto4.jpg" alt="Recuerdo 4" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+4'">
+          <img id="thumb3" src="./foto4.jpg" alt="Recuerdo 4" onerror="handleImgError(this, 'foto4')">
           <span>Recuerdo 4 🌟</span>
         </div>
         <div class="card-item" onclick="openPhotoModal(4)">
-          <img src="foto5.jpg" alt="Recuerdo 5" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+5'">
+          <img id="thumb4" src="./foto5.jpg" alt="Recuerdo 5" onerror="handleImgError(this, 'foto5')">
           <span>Recuerdo 5 🏡</span>
         </div>
         <div class="card-item" onclick="openPhotoModal(5)">
-          <img src="foto6.jpg" alt="Recuerdo 6" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+6'">
+          <img id="thumb5" src="./foto6.jpg" alt="Recuerdo 6" onerror="handleImgError(this, 'foto6')">
           <span>Recuerdo 6 💕</span>
         </div>
         <div class="card-item" onclick="openPhotoModal(6)">
-          <img src="foto7.jpg" alt="Recuerdo 7" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+7'">
+          <img id="thumb6" src="./foto7.jpg" alt="Recuerdo 7" onerror="handleImgError(this, 'foto7')">
           <span>Recuerdo 7 👑</span>
         </div>
       </div>
@@ -398,7 +397,7 @@
 
   </div>
 
-  <!-- MODAL FLOTANTE DE FOTOS -->
+  <!-- MODAL DE FOTOS -->
   <div class="photo-modal" id="photoModal" onclick="closePhotoModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close-modal" onclick="closePhotoModal()">&times;</span>
@@ -412,7 +411,6 @@
   </audio>
 
   <script>
-    // Historias
     const stories = {
       1: "Siete años no son solo 2,555 días...\n\nSon miles de conversaciones, cientos de risas compartidas, complicidad y un camino hermoso que hemos construido juntos paso a paso.\n\nBienvenida Gatasha a estas páginas dedicadas a nuestro 7° Aniversario. Un pequeño refugio digital para recordar de dónde venimos y celebrar todo lo que somos.",
       2: "Dicen que el tiempo vuela cuando uno es feliz...\n\n7 años, 84 meses, más de 3,600 semanas juntos. Mirar atrás y ver todo lo que hemos vivido juntos parece un sueño. Cada año ha tenido su propio color, sus propias risas y sus momentos inolvidables.",
@@ -423,23 +421,42 @@
       7: "Siete años merecen una celebración a la altura de nuestra historia...\n\n¿Aceptas tener una cita mágica e inolvidable conmigo para celebrar nuestros 7 años juntos?"
     };
 
-    // DATOS DE LAS FOTOS Y DEDICATORIAS (Puedes cambiar los textos aquí)
+    // Manejador Inteligente de Errores de Imagen (Prueba automáticamente .png, .jpeg, .PNG, .JPG si .jpg falla)
+    function handleImgError(imgElement, baseName) {
+      if (!imgElement.dataset.step) {
+        imgElement.dataset.step = "1";
+        imgElement.src = "./" + baseName + ".png";
+      } else if (imgElement.dataset.step === "1") {
+        imgElement.dataset.step = "2";
+        imgElement.src = "./" + baseName + ".jpeg";
+      } else if (imgElement.dataset.step === "2") {
+        imgElement.dataset.step = "3";
+        imgElement.src = "./" + baseName + ".JPG";
+      } else if (imgElement.dataset.step === "3") {
+        imgElement.dataset.step = "4";
+        imgElement.src = "./" + baseName + ".PNG";
+      } else {
+        imgElement.src = "https://via.placeholder.com/300x200/f0e6d2/2b1b17?text=Foto+no+encontrada";
+      }
+    }
+
     const photoData = [
-      { src: 'foto1.jpg', text: '🐾 Recuerdo 1: Un hermoso momento guardado en el corazón.' },
-      { src: 'foto2.jpg', text: '🐾 Recuerdo 2: Una gran aventura que vivimos juntos.' },
-      { src: 'foto3.jpg', text: '🐾 Recuerdo 3: Risas, complicidad e instantes especiales.' },
-      { src: 'foto4.jpg', text: '🐾 Recuerdo 4: Creciendo y apoyándonos en cada paso.' },
-      { src: 'foto5.jpg', text: '🐾 Recuerdo 5: Construyendo nuestro propio lugar seguro.' },
-      { src: 'foto6.jpg', text: '🐾 Recuerdo 6: Un detalle inolvidable en nuestra historia.' },
-      { src: 'foto7.jpg', text: '🐾 Recuerdo 7: Celebrando nuestro amor día a día.' }
+      { idName: 'foto1', text: '🐾 Recuerdo 1: Un hermoso momento guardado en el corazón.' },
+      { idName: 'foto2', text: '🐾 Recuerdo 2: Una gran aventura que vivimos juntos.' },
+      { idName: 'foto3', text: '🐾 Recuerdo 3: Risas, complicidad e instantes especiales.' },
+      { idName: 'foto4', text: '🐾 Recuerdo 4: Creciendo y apoyándonos en cada paso.' },
+      { idName: 'foto5', text: '🐾 Recuerdo 5: Construyendo nuestro propio lugar seguro.' },
+      { idName: 'foto6', text: '🐾 Recuerdo 6: Un detalle inolvidable en nuestra historia.' },
+      { idName: 'foto7', text: '🐾 Recuerdo 7: Celebrando nuestro amor día a día.' }
     ];
 
     function openPhotoModal(index) {
       const modal = document.getElementById('photoModal');
       const modalImg = document.getElementById('modalImg');
       const modalCaption = document.getElementById('modalCaption');
-
-      modalImg.src = photoData[index].src;
+      
+      const thumbImg = document.getElementById('thumb' + index);
+      modalImg.src = thumbImg.src;
       modalCaption.innerHTML = photoData[index].text;
       modal.style.display = 'flex';
     }
@@ -448,14 +465,14 @@
       document.getElementById('photoModal').style.display = 'none';
     }
 
-    // Colección de Gatitos Esporádicos
     const catIcons = ['🐈‍⬛', '🐈', '🐱', '🐾', '🖤', '🤍', '🤎'];
-
     let unlocked = false;
-    let typingTimeout;
+    let typingTimeout = null;
 
-    function typeWriter(text, elementId, speed = 60, callback = null) {
+    function typeWriter(text, elementId, speed = 50, callback = null) {
       const container = document.getElementById(elementId);
+      if (!container) return;
+      
       container.innerHTML = '';
       let i = 0;
 
@@ -481,19 +498,22 @@
         return;
       }
 
-      clearTimeout(typingTimeout);
+      if (typingTimeout) clearTimeout(typingTimeout);
 
       document.querySelectorAll('.chapter').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
-      document.getElementById('cap' + num).classList.add('active');
-      document.querySelectorAll('.tab-btn')[num - 1].classList.add('active');
+      const currentChapter = document.getElementById('cap' + num);
+      if (currentChapter) currentChapter.classList.add('active');
+      
+      const currentTab = document.querySelectorAll('.tab-btn')[num - 1];
+      if (currentTab) currentTab.classList.add('active');
 
       if(num === 3) document.getElementById('cardsGrid').style.display = 'none';
       if(num === 4) document.getElementById('secretBox').style.display = 'none';
       if(num === 7) document.getElementById('questionGroup').style.display = 'none';
 
-      typeWriter(stories[num], 'text' + num, 60, () => {
+      typeWriter(stories[num], 'text' + num, 50, () => {
         if(num === 3) document.getElementById('cardsGrid').style.display = 'grid';
         if(num === 4) document.getElementById('secretBox').style.display = 'block';
         if(num === 7) document.getElementById('questionGroup').style.display = 'flex';
@@ -553,7 +573,7 @@
 
     const meow = document.getElementById('meowSound');
     function moveNoButton() {
-      meow.play().catch(() => {});
+      if (meow) meow.play().catch(() => {});
       const btnNo = document.getElementById('btnNo');
       const x = Math.random() * (window.innerWidth - 150);
       const y = Math.random() * (window.innerHeight - 80);
@@ -562,9 +582,12 @@
       btnNo.style.top = y + 'px';
     }
 
-    window.onload = () => {
-      goToChapter(1);
-    };
+    // Inicialización Limpia al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        goToChapter(1);
+      }, 100);
+    });
   </script>
 </body>
 </html>
