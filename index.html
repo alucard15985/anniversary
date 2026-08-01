@@ -341,7 +341,7 @@
 
   </style>
 </head>
-<body onclick="autoStartAudio()">
+<body>
 
   <!-- CONTROL DE MÚSICA DE FONDO FLOTANTE -->
   <div class="music-player">
@@ -350,7 +350,7 @@
   </div>
 
   <!-- AUDIO DE FONDO -->
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop preload="auto">
     <source src="./musica.mp3" type="audio/mpeg">
   </audio>
 
@@ -481,19 +481,28 @@
       7: "Siete años merecen una celebración a la altura de nuestra historia...\n\n¿Aceptas tener una cita mágica e inolvidable conmigo para celebrar nuestros 7 años juntos?"
     };
 
-    // CONTROL DE MÚSICA DE FONDO
+    // LÓGICA DE REPRODUCCIÓN DESDE EL SEGUNDO 3
     let audioStarted = false;
 
-    function autoStartAudio() {
-      if (!audioStarted) {
-        const bgMusic = document.getElementById('bgMusic');
-        bgMusic.volume = 0.4; // Volumen suave
-        bgMusic.play().then(() => {
-          audioStarted = true;
-          document.getElementById('musicToggleBtn').innerText = '⏸️';
-          document.getElementById('musicStatus').innerText = 'Música: Sonando ❤️';
-        }).catch(() => {});
+    function startMusicAtThreeSeconds() {
+      if (audioStarted) return;
+
+      const bgMusic = document.getElementById('bgMusic');
+      bgMusic.volume = 0.4;
+
+      // Establece el tiempo inicial en el segundo 3
+      if (bgMusic.currentTime < 3) {
+        bgMusic.currentTime = 3;
       }
+
+      bgMusic.play().then(() => {
+        audioStarted = true;
+        document.getElementById('musicToggleBtn').innerText = '⏸️';
+        document.getElementById('musicStatus').innerText = 'Música: Sonando ❤️';
+        removeInteractionListeners();
+      }).catch(() => {
+        // Bloqueado por el navegador hasta el primer clic
+      });
     }
 
     function toggleBgMusic(e) {
@@ -503,6 +512,9 @@
       const status = document.getElementById('musicStatus');
 
       if (bgMusic.paused) {
+        if (!audioStarted || bgMusic.currentTime < 3) {
+          bgMusic.currentTime = 3;
+        }
         bgMusic.volume = 0.4;
         bgMusic.play();
         btn.innerText = '⏸️';
@@ -514,6 +526,17 @@
         status.innerText = 'Música: Pausada';
       }
     }
+
+    function removeInteractionListeners() {
+      document.removeEventListener('click', startMusicAtThreeSeconds);
+      document.removeEventListener('touchstart', startMusicAtThreeSeconds);
+      document.removeEventListener('keydown', startMusicAtThreeSeconds);
+    }
+
+    // Escuchadores para desbloquear autoplay en el primer toque si el navegador bloquea el arranque en frío
+    document.addEventListener('click', startMusicAtThreeSeconds);
+    document.addEventListener('touchstart', startMusicAtThreeSeconds);
+    document.addEventListener('keydown', startMusicAtThreeSeconds);
 
     // Manejador de Imágenes
     function handleImgError(imgElement, baseName) {
@@ -679,6 +702,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         goToChapter(1);
+        startMusicAtThreeSeconds(); // Intenta autoplay inmediato en el segundo 3
       }, 100);
     });
   </script>
