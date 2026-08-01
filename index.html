@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuestro Rincón Especial 🐈📜❤️</title>
-  <!-- Fuentes Opción 1: Dancing Script + Indie Flower -->
+  <title>7 Años Juntos - Gatasha 🐈📜❤️</title>
+  <!-- Tipografías Opción 1: Dancing Script + Indie Flower -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Indie+Flower&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Librería para la Lluvia de Confeti al decir SÍ -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -98,7 +101,7 @@
       border-radius: 16px;
       padding: 45px 35px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 90px rgba(139, 69, 19, 0.12), 0 0 20px rgba(255, 215, 0, 0.1);
-      min-height: 500px;
+      min-height: 520px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -108,7 +111,7 @@
     .chapter { display: none; }
     .chapter.active { display: block; }
 
-    /* Títulos: Dancing Script */
+    /* Títulos */
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 3.2rem;
@@ -119,10 +122,10 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
     }
 
-    /* Texto Narrativo: Indie Flower */
+    /* Texto Narrativo */
     .typewriter-text {
       font-family: 'Indie Flower', cursive;
-      font-size: 1.65rem;
+      font-size: 1.6rem;
       line-height: 1.6;
       min-height: 140px;
       text-align: left;
@@ -147,17 +150,17 @@
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 15px;
+      gap: 12px;
       margin-top: 20px;
     }
 
     .card-item {
       background: rgba(179, 57, 57, 0.05);
-      padding: 15px;
+      padding: 12px;
       border-radius: 10px;
       border: 1px dashed var(--accent-color);
       font-family: 'Indie Flower', cursive;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: bold;
       cursor: pointer;
       text-align: center;
@@ -233,26 +236,30 @@
     
     <!-- Capítulo 1 -->
     <div class="chapter active" id="cap1">
-      <h1>Capítulo I: El Comienzo 🌹</h1>
+      <h1>Capítulo I: El Prólogo 🌹</h1>
       <div class="typewriter-text" id="text1"></div>
-      <button class="btn-next" onclick="goToChapter(2)">Paso a la siguiente página ➔</button>
+      <button class="btn-next" onclick="goToChapter(2)">Siguiente página ➔</button>
     </div>
 
     <!-- Capítulo 2 -->
     <div class="chapter" id="cap2">
-      <h1>Capítulo II: El Tiempo ⏳</h1>
+      <h1>Capítulo II: 7 Años en Números ⏳</h1>
       <div class="typewriter-text" id="text2"></div>
-      <button class="btn-next" onclick="goToChapter(3)">Continuar leyendo ➔</button>
+      <button class="btn-next" onclick="goToChapter(3)">Continuar el viaje ➔</button>
     </div>
 
     <!-- Capítulo 3 -->
     <div class="chapter" id="cap3">
-      <h1>Capítulo III: Fragmentos 📸</h1>
+      <h1>Capítulo III: 7 Destellos 📸</h1>
       <div class="typewriter-text" id="text3"></div>
       <div class="cards-grid" id="cardsGrid" style="display:none;">
-        <div class="card-item" onclick="alert('🐾 Aquella primera cita inolvidable...')">Recuerdo I</div>
-        <div class="card-item" onclick="alert('🐾 Esa risa que alegra cualquier día.')">Recuerdo II</div>
-        <div class="card-item" onclick="alert('🐾 Un momento simple, pero perfecto.')">Recuerdo III</div>
+        <div class="card-item" onclick="alert('🐾 Año 1: El hermoso comienzo de nuestra historia.')">Año 1 💖</div>
+        <div class="card-item" onclick="alert('🐾 Año 2: Las primeras grandes aventuras juntas.')">Año 2 ✨</div>
+        <div class="card-item" onclick="alert('🐾 Año 3: Risas, complicidad y momentos inolvidables.')">Año 3 🐾</div>
+        <div class="card-item" onclick="alert('🐾 Año 4: Creciendo y apoyándonos en cada paso.')">Año 4 🌟</div>
+        <div class="card-item" onclick="alert('🐾 Año 5: Construyendo nuestro propio refugio seguro.')">Año 5 🏡</div>
+        <div class="card-item" onclick="alert('🐾 Año 6: Un amor que se hace más fuerte cada día.')">Año 6 💕</div>
+        <div class="card-item" onclick="alert('🐾 Año 7: Celebrando 7 años inolvidables juntas.')">Año 7 👑</div>
       </div>
       <button class="btn-next" onclick="goToChapter(4)" style="margin-top:25px;">Siguiente capítulo ➔</button>
     </div>
@@ -266,29 +273,29 @@
         <br>
         <button class="btn-next" onclick="checkSecret()">Romper el sello 🔑</button>
       </div>
-      <p id="errorMsg" style="color: #b33939; font-family: 'Indie Flower'; font-size: 1.4rem; display: none; text-align:center; margin-top:10px; font-weight:bold;">¡Ese no es el sello secreto! Intenta de nuevo 🐱</p>
+      <p id="errorMsg" style="color: #b33939; font-family: 'Indie Flower'; font-size: 1.4rem; display: none; text-align:center; margin-top:10px; font-weight:bold;">¡Ese no es el sello secreto, Gatasha! Intenta de nuevo 🐱</p>
     </div>
 
     <!-- Capítulo 5 -->
     <div class="chapter" id="cap5">
-      <h1>Capítulo V: Razones 💖</h1>
+      <h1>Capítulo V: 7 Razones 💖</h1>
       <div class="typewriter-text" id="text5"></div>
       <button class="btn-next" onclick="goToChapter(6)">Siguiente página ➔</button>
     </div>
 
     <!-- Capítulo 6 -->
     <div class="chapter" id="cap6">
-      <h1>Capítulo VI: Carta Especial 💌</h1>
+      <h1>Capítulo VI: Carta de Aniversario 💌</h1>
       <div class="typewriter-text" id="text6"></div>
       <button class="btn-next" onclick="goToChapter(7)">Llegar al final 🎁</button>
     </div>
 
     <!-- Capítulo 7 -->
     <div class="chapter" id="cap7">
-      <h1>Capítulo VII: La Pregunta 🌹</h1>
+      <h1>Capítulo VII: La Celebración 🌹</h1>
       <div class="typewriter-text" id="text7"></div>
       <div class="btn-group" id="questionGroup" style="display:none;">
-        <button class="btn-next btn-yes" onclick="alert('¡Sabía que dirías que sí! ❤️ Prometo una cita inolvidable.')">¡SÍ, ACEPTO! 😍</button>
+        <button class="btn-next btn-yes" onclick="celebrateYes()">¡SÍ, ACEPTO! 😍</button>
         <button class="btn-next btn-no" id="btnNo" onmouseover="moveNoButton()" onclick="moveNoButton()">No 🐱</button>
       </div>
     </div>
@@ -300,18 +307,18 @@
   </audio>
 
   <script>
-    // Historias
+    // Historias Adaptadas a 7 Años de Aniversario y Gatasha
     const stories = {
-      1: "Había una vez, un rincón creado únicamente para nosotros...\n\nUn pequeño libro digital para detener el tiempo y recordar lo bonito que es caminar juntos. Bienvenido a nuestras páginas.",
-      2: "Dicen que el tiempo vuela cuando uno es feliz...\n\nPero contigo no solo pasan los minutos, se guardan miradas, risas compartidas y momentos que se quedan grabados para siempre.",
-      3: "Toca suavemente cada nota guardada en este pergamino para revivir fragmentos de nuestra historia:",
-      4: "Para abrir las páginas secretas que guardan lo más especial, escribe nuestra palabra secreta de reconocimiento:",
-      5: "Razones para quererte cada día:\n\n• Por tu forma única de iluminar mis días.\n• Por tu paciencia y la calidez de tus abrazos.\n• Por cada risa, cada 'miau' y cada silencio cómodo.\n• Por ser, simplemente, mi persona favorita.",
-      6: "Querida persona especial,\n\nQuería construir este manuscrito para recordarte lo infinitamente importante que eres para mí. Gracias por estar, por cuidar de nosotros y por hacer que la vida sea más bonita a tu lado.\n\nCon todo mi amor ❤️",
-      7: "Y así llegamos a la última hoja de este capítulo...\n\n¿Aceptas tener una cita especial y mágica conmigo este fin de semana?"
+      1: "Siete años no son solo 2,555 días...\n\nSon miles de conversaciones, cientos de risas compartidas, complicidad y un camino hermoso que hemos construido juntas paso a paso.\n\nBienvenida Gatasha a estas páginas dedicadas a nuestro 7° Aniversario. Un pequeño refugio digital para recordar de dónde venimos y celebrar todo lo que somos.",
+      2: "Dicen que el tiempo vuela cuando uno es feliz...\n\n7 años, 84 meses, más de 3,600 semanas juntas. Mirar atrás y ver todo lo que hemos vivido juntas parece un sueño. Cada año ha tenido su propio color, sus propias risas y sus momentos inolvidables.",
+      3: "Siete momentos especiales grabados en el corazón. Haz clic en cada año para recordar parte de nuestro camino:",
+      4: "Siete años guardando secretos cómplices, miradas que lo dicen todo y palabras que solo nosotros entendemos.\n\nPara desbloquear las páginas finales de este aniversario, ingresa la palabra secreta:",
+      5: "7 Razones por las que te elijo, año tras año:\n\n1. Por tu sonrisa que ilumina mis días como el primer día.\n2. Por la calma y paz que me das siempre.\n3. Por nuestras bromas internas y el amor por los gatitos.\n4. Por cómo hemos crecido juntas sin perder nuestra esencia.\n5. Por tu paciencia infinita y tu hermoso corazón.\n6. Por ser mi lugar seguro en el mundo.\n7. Porque a tu lado, la vida es infinitamente más bonita.",
+      6: "Querida Gatasha,\n\nHoy celebramos 7 años caminando juntas. Mirar nuestro recorrido me llena de un orgullo enorme y de una gratitud profunda. Gracias por tu amor incondicional, por cada abrazo reconfortante y por construir a mi lado esta historia tan bonita.\n\nPrometo seguir cuidando de nosotros, riendo con nuestras locuras y apoyándote siempre.\n\n¡Feliz 7° Aniversario, mi amor! ❤️",
+      7: "Siete años merecen una celebración a la altura de nuestra historia...\n\n¿Aceptas tener una cita mágica e inolvidable conmigo para celebrar nuestros 7 años juntas?"
     };
 
-    // Colección de Gatitos de Distintos Colores
+    // Colección de Gatitos Esporádicos
     const catIcons = ['🐈‍⬛', '🐈', '🐱', '🐾', '🖤', '🤍', '🤎'];
 
     let unlocked = false;
@@ -341,7 +348,7 @@
 
     function goToChapter(num) {
       if (num > 4 && !unlocked) {
-        alert("¡Debes resolver la clave del Capítulo IV para continuar! 🔒🐾");
+        alert("¡Debes resolver la clave del Capítulo IV para continuar, Gatasha! 🔒🐾");
         return;
       }
 
@@ -374,7 +381,7 @@
           if (index >= 4) btn.classList.remove('locked');
         });
 
-        alert('¡Sello roto con éxito! Se han desbloqueado las páginas finales. 📜✨');
+        alert('¡Sello roto con éxito! Se han desbloqueado los capítulos finales. 📜✨');
         goToChapter(5);
       } else {
         document.getElementById('errorMsg').style.display = 'block';
@@ -404,7 +411,21 @@
       spawnRandomCat();
     }, Math.random() * 2500 + 3500);
 
-    // Botón "No"
+    // Celebración al hacer Clic en SÍ
+    function celebrateYes() {
+      // Lluvia de confeti
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+
+      setTimeout(() => {
+        alert('¡Sabía que dirías que sí, Gatasha! ❤️ Prometo una cita de 7° aniversario totalmente inolvidable.');
+      }, 500);
+    }
+
+    // Botón "No" juguetón
     const meow = document.getElementById('meowSound');
     function moveNoButton() {
       meow.play().catch(() => {});
