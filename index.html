@@ -34,6 +34,55 @@
       position: relative;
     }
 
+    /* BOTÓN DE MÚSICA FLOTANTE */
+    .music-player {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 99;
+      background: rgba(251, 247, 238, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      padding: 8px 14px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+    }
+
+    .music-player:hover {
+      background: rgba(251, 247, 238, 0.25);
+    }
+
+    .music-btn {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(179, 57, 57, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .music-info {
+      font-family: 'Indie Flower', cursive;
+      font-size: 1rem;
+      color: #e0d0b0;
+      user-select: none;
+    }
+
     /* GATOS ESPORÁDICOS */
     .random-cat {
       position: fixed;
@@ -292,7 +341,18 @@
 
   </style>
 </head>
-<body>
+<body onclick="autoStartAudio()">
+
+  <!-- CONTROL DE MÚSICA DE FONDO FLOTANTE -->
+  <div class="music-player">
+    <button class="music-btn" id="musicToggleBtn" onclick="toggleBgMusic(event)">🎵</button>
+    <span class="music-info" id="musicStatus">Música: Pausada</span>
+  </div>
+
+  <!-- AUDIO DE FONDO -->
+  <audio id="bgMusic" loop>
+    <source src="./musica.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- Navegación -->
   <div class="nav-tabs">
@@ -421,7 +481,41 @@
       7: "Siete años merecen una celebración a la altura de nuestra historia...\n\n¿Aceptas tener una cita mágica e inolvidable conmigo para celebrar nuestros 7 años juntos?"
     };
 
-    // Manejador Inteligente de Errores de Imagen (Prueba automáticamente .png, .jpeg, .PNG, .JPG si .jpg falla)
+    // CONTROL DE MÚSICA DE FONDO
+    let audioStarted = false;
+
+    function autoStartAudio() {
+      if (!audioStarted) {
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.4; // Volumen suave
+        bgMusic.play().then(() => {
+          audioStarted = true;
+          document.getElementById('musicToggleBtn').innerText = '⏸️';
+          document.getElementById('musicStatus').innerText = 'Música: Sonando ❤️';
+        }).catch(() => {});
+      }
+    }
+
+    function toggleBgMusic(e) {
+      if (e) e.stopPropagation();
+      const bgMusic = document.getElementById('bgMusic');
+      const btn = document.getElementById('musicToggleBtn');
+      const status = document.getElementById('musicStatus');
+
+      if (bgMusic.paused) {
+        bgMusic.volume = 0.4;
+        bgMusic.play();
+        btn.innerText = '⏸️';
+        status.innerText = 'Música: Sonando ❤️';
+        audioStarted = true;
+      } else {
+        bgMusic.pause();
+        btn.innerText = '🎵';
+        status.innerText = 'Música: Pausada';
+      }
+    }
+
+    // Manejador de Imágenes
     function handleImgError(imgElement, baseName) {
       if (!imgElement.dataset.step) {
         imgElement.dataset.step = "1";
@@ -582,7 +676,6 @@
       btnNo.style.top = y + 'px';
     }
 
-    // Inicialización Limpia al cargar la página
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         goToChapter(1);
