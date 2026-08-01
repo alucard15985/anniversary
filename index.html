@@ -127,7 +127,7 @@
       font-family: 'Indie Flower', cursive;
       font-size: 1.6rem;
       line-height: 1.6;
-      min-height: 140px;
+      min-height: 120px;
       text-align: left;
       white-space: pre-wrap;
       color: var(--ink-color);
@@ -146,29 +146,104 @@
 
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* Elementos Interactivos */
+    /* GRID DE FOTOS EN EL CAPÍTULO 3 */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
       margin-top: 20px;
     }
 
     .card-item {
-      background: rgba(179, 57, 57, 0.05);
-      padding: 12px;
+      background: #fff;
+      padding: 8px;
       border-radius: 10px;
-      border: 1px dashed var(--accent-color);
-      font-family: 'Indie Flower', cursive;
-      font-size: 1.25rem;
-      font-weight: bold;
+      border: 1px solid #e2d1b0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       cursor: pointer;
       text-align: center;
       transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-item img {
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .card-item span {
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.1rem;
+      font-weight: bold;
       color: var(--ink-color);
     }
 
-    .card-item:hover { background: rgba(179, 57, 57, 0.12); transform: translateY(-3px); }
+    .card-item:hover { 
+      transform: translateY(-4px) scale(1.03); 
+      box-shadow: 0 8px 15px rgba(179, 57, 57, 0.2);
+    }
+
+    /* MODAL DE FOTOS (VENTANA FLOTANTE) */
+    .photo-modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--paper-bg);
+      border-radius: 16px;
+      padding: 25px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 2px solid var(--accent-color);
+      animation: modalFadeIn 0.3s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 10px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+    }
+
+    .modal-caption {
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.5rem;
+      color: var(--ink-color);
+      line-height: 1.4;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 1.8rem;
+      color: var(--accent-color);
+      cursor: pointer;
+      font-weight: bold;
+    }
 
     .secret-box { margin-top: 20px; text-align: center; }
 
@@ -253,13 +328,34 @@
       <h1>Capítulo III: 7 Destellos 📸</h1>
       <div class="typewriter-text" id="text3"></div>
       <div class="cards-grid" id="cardsGrid" style="display:none;">
-        <div class="card-item" onclick="alert('🐾 Un hermoso momento guardado en el corazón.')">Recuerdo 1 💖</div>
-        <div class="card-item" onclick="alert('🐾 Una gran aventura que vivimos juntos.')">Recuerdo 2 ✨</div>
-        <div class="card-item" onclick="alert('🐾 Risas, complicidad y instantes especiales.')">Recuerdo 3 🐾</div>
-        <div class="card-item" onclick="alert('🐾 Creciendo y apoyándonos en cada paso.')">Recuerdo 4 🌟</div>
-        <div class="card-item" onclick="alert('🐾 Construyendo nuestro propio lugar seguro.')">Recuerdo 5 🏡</div>
-        <div class="card-item" onclick="alert('🐾 Un detalle inolvidable en nuestra historia.')">Recuerdo 6 💕</div>
-        <div class="card-item" onclick="alert('🐾 Celebrando nuestro amor día a día.')">Recuerdo 7 👑</div>
+        <div class="card-item" onclick="openPhotoModal(0)">
+          <img src="foto1.jpg" alt="Recuerdo 1" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+1'">
+          <span>Recuerdo 1 💖</span>
+        </div>
+        <div class="card-item" onclick="openPhotoModal(1)">
+          <img src="foto2.jpg" alt="Recuerdo 2" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+2'">
+          <span>Recuerdo 2 ✨</span>
+        </div>
+        <div class="card-item" onclick="openPhotoModal(2)">
+          <img src="foto3.jpg" alt="Recuerdo 3" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+3'">
+          <span>Recuerdo 3 🐾</span>
+        </div>
+        <div class="card-item" onclick="openPhotoModal(3)">
+          <img src="foto4.jpg" alt="Recuerdo 4" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+4'">
+          <span>Recuerdo 4 🌟</span>
+        </div>
+        <div class="card-item" onclick="openPhotoModal(4)">
+          <img src="foto5.jpg" alt="Recuerdo 5" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+5'">
+          <span>Recuerdo 5 🏡</span>
+        </div>
+        <div class="card-item" onclick="openPhotoModal(5)">
+          <img src="foto6.jpg" alt="Recuerdo 6" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+6'">
+          <span>Recuerdo 6 💕</span>
+        </div>
+        <div class="card-item" onclick="openPhotoModal(6)">
+          <img src="foto7.jpg" alt="Recuerdo 7" onerror="this.src='https://via.placeholder.com/150/b33939/ffffff?text=Recuerdo+7'">
+          <span>Recuerdo 7 👑</span>
+        </div>
       </div>
       <button class="btn-next" onclick="goToChapter(4)" style="margin-top:25px;">Siguiente capítulo ➔</button>
     </div>
@@ -302,12 +398,21 @@
 
   </div>
 
+  <!-- MODAL FLOTANTE DE FOTOS -->
+  <div class="photo-modal" id="photoModal" onclick="closePhotoModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-modal" onclick="closePhotoModal()">&times;</span>
+      <img id="modalImg" src="" alt="Foto de recuerdo">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
   <audio id="meowSound">
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_145b98a0d4.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Historias Adaptadas con Concordancia Masculina (juntos)
+    // Historias
     const stories = {
       1: "Siete años no son solo 2,555 días...\n\nSon miles de conversaciones, cientos de risas compartidas, complicidad y un camino hermoso que hemos construido juntos paso a paso.\n\nBienvenida Gatasha a estas páginas dedicadas a nuestro 7° Aniversario. Un pequeño refugio digital para recordar de dónde venimos y celebrar todo lo que somos.",
       2: "Dicen que el tiempo vuela cuando uno es feliz...\n\n7 años, 84 meses, más de 3,600 semanas juntos. Mirar atrás y ver todo lo que hemos vivido juntos parece un sueño. Cada año ha tenido su propio color, sus propias risas y sus momentos inolvidables.",
@@ -318,13 +423,37 @@
       7: "Siete años merecen una celebración a la altura de nuestra historia...\n\n¿Aceptas tener una cita mágica e inolvidable conmigo para celebrar nuestros 7 años juntos?"
     };
 
+    // DATOS DE LAS FOTOS Y DEDICATORIAS (Puedes cambiar los textos aquí)
+    const photoData = [
+      { src: 'foto1.jpg', text: '🐾 Recuerdo 1: Un hermoso momento guardado en el corazón.' },
+      { src: 'foto2.jpg', text: '🐾 Recuerdo 2: Una gran aventura que vivimos juntos.' },
+      { src: 'foto3.jpg', text: '🐾 Recuerdo 3: Risas, complicidad e instantes especiales.' },
+      { src: 'foto4.jpg', text: '🐾 Recuerdo 4: Creciendo y apoyándonos en cada paso.' },
+      { src: 'foto5.jpg', text: '🐾 Recuerdo 5: Construyendo nuestro propio lugar seguro.' },
+      { src: 'foto6.jpg', text: '🐾 Recuerdo 6: Un detalle inolvidable en nuestra historia.' },
+      { src: 'foto7.jpg', text: '🐾 Recuerdo 7: Celebrando nuestro amor día a día.' }
+    ];
+
+    function openPhotoModal(index) {
+      const modal = document.getElementById('photoModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalCaption = document.getElementById('modalCaption');
+
+      modalImg.src = photoData[index].src;
+      modalCaption.innerHTML = photoData[index].text;
+      modal.style.display = 'flex';
+    }
+
+    function closePhotoModal() {
+      document.getElementById('photoModal').style.display = 'none';
+    }
+
     // Colección de Gatitos Esporádicos
     const catIcons = ['🐈‍⬛', '🐈', '🐱', '🐾', '🖤', '🤍', '🤎'];
 
     let unlocked = false;
     let typingTimeout;
 
-    // Escritura pausada: 60ms por carácter
     function typeWriter(text, elementId, speed = 60, callback = null) {
       const container = document.getElementById(elementId);
       container.innerHTML = '';
@@ -388,7 +517,6 @@
       }
     }
 
-    // Generador de Gatos Esporádicos
     function spawnRandomCat() {
       const cat = document.createElement('div');
       cat.className = 'random-cat cat-appear';
@@ -411,7 +539,6 @@
       spawnRandomCat();
     }, Math.random() * 2500 + 3500);
 
-    // Celebración al hacer Clic en SÍ
     function celebrateYes() {
       confetti({
         particleCount: 120,
@@ -424,7 +551,6 @@
       }, 500);
     }
 
-    // Botón "No" juguetón
     const meow = document.getElementById('meowSound');
     function moveNoButton() {
       meow.play().catch(() => {});
